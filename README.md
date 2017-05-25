@@ -1,4 +1,5 @@
 # sandbox
-sandbox.gregwong.me
+A sandbox for my experiments.
 
-Sandbox for experiments.
+To visit, go to
+sandbox.gregwong.me
