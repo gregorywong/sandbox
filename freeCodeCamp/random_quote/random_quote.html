@@ -1,0 +1,77 @@
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+
+  <title>Random Quote Generator</title>
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:400,900,400italic,700italic' rel='stylesheet'>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" media="screen" href="style.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+  <script defer src="script.js"></script>
+
+</head>
+
+
+
+<body>
+
+<!-- hyperlinks: target="_blank" for codepen.io -->
+<div class="container h-100">
+  <div class="row h-100 justify-content-center">
+    <div class="col-11 col-md-10 col-lg-8 col-xl-6 my-auto">
+      <div class="card p-3">
+        <div class="card-title text-center">
+          <h3>
+            Quote of the Day
+          </h3>
+        </div>
+        <blockquote class="blockquote text-muted">
+          <p id="quote">
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+          </p>
+          <footer class="blockquote-footer text-muted">
+            <cite>
+              <span id="who">
+                Someone
+              </span>
+            </cite>
+          </footer>
+        </blockquote>
+
+        <div class="">
+
+          <div class="float-left ml-2">
+            <!-- original solution that doesn't work because Adblock hides <a> with hrefs to twitter
+            <a class="share" href="" target="_blank">
+              <i class="fa fa-twitter-square fa-4x"></i>
+              Share on Twitter
+            </a>
+            -->
+            <a class="tweet" href="#">
+              <i class="fa fa-twitter-square fa-4x"></i>
+            </a>
+          </div>
+          <div class="float-right mr-2">
+            <button id="generate" type="button" class="btn btn-lg btn-warning my-2">Generate!</button>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-3">
+        <p>Coded by <a class="text-warning" href="http://gregwong.me" target="_blank">Greg Wong</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+html, body {
+  height: 100%;
+  background-color: #6B2426;
+}
+
+.icon-large {
+  font-size: 40px;
+}
+
+/* btn-default has been changed to btn-secondary in Bootstrap 4; adding it here for Bootstrap Toggle */
+.btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+.footer-color {
+  background-color: #822B2E;
+}
+
+/* for testing */
+
+.test-blue {
+  background-color: blue;
+}
+
+.test-red {
+  background-color: red;
+}
