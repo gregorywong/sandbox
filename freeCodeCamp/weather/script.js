@@ -65,7 +65,7 @@ function getLocation(){
       getLocationSuccess,
       function(error){
         if (error.code == error.PERMISSION_DENIED){
-          $("#status_message").text("Geolocation denied by user.").effect("shake");
+          $("#status_message").text("Could not get geolocation.").effect("shake");
         }
       }
     );
