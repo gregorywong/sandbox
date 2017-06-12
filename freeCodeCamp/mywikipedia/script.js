@@ -1,5 +1,6 @@
 $('input#search-keywords').keypress(function (e) {
     var code = e.keyCode || e.which;
+    $("p#message").text("");
     if (code === 13){
       e.preventDefault();
       searchStart();
@@ -11,7 +12,7 @@ $('button#search-btn').click(function(){
 });
 
 function searchStart(){
-  $("p#message").text("");
+  $("p#message").text("Searching...");
   var keywords = $("input#search-keywords").val();
   if (keywords != ""){
     var url = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=1&explaintext=1&titles=&generator=search&gsrsearch="+keywords +"&callback=?";
@@ -20,11 +21,13 @@ function searchStart(){
     });
   }
   else {
+    $("p#message").text("Search bar is empty!");
     $("input#search-keywords").parent().effect("shake");
   }
 }
 
 function searchDone(json){
+    $("p#message").text("");
     var entries = "";
     var pages = json.query.pages;
     for (var pageid in pages){
