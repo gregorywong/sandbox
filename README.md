@@ -2,4 +2,4 @@
 A sandbox for my experiments.
 
 To visit, go to
-sandbox.gregwong.me
+http://sandbox.gregwong.me
