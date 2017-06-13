@@ -1,0 +1,25 @@
+html, body {
+  height: 100%;
+  background-color: black;
+}
+
+.content-entry {
+  background-color: #787878;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgb(223,223,223);
+  color: white;
+}
+
+.content-entry:focus, .content-entry:hover {
+  background-color: lightgray;
+  color: black;
+}
+
+.text-red {
+  color: red;
+}
+
+.text-orange {
+  color: #FF8C00;
+}
