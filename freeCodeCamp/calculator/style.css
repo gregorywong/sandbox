@@ -1,0 +1,68 @@
+html, body {
+  height: 100%;
+  background-color: black;
+}
+
+.tall-button {
+}
+
+.px-4-5 {
+  padding-left: 2.5rem!important;
+  padding-right: 2.5rem!important;
+}
+
+.pb-4-5 {
+  padding-bottom: 2.3rem!important;
+}
+
+.super-rounded {
+  border-radius: 20px;
+}
+
+.calculator-body {
+  background-color: gray;
+  box-shadow: 0px 0px 1px 0px white, inset 0px 0px 15px 0px black;
+}
+
+.btn {
+  box-shadow: inset 0px 1px 7px 0px gray;
+}
+
+.btn-danger {
+  box-shadow: inset 0px 1px 7px 0px #e07774;
+}
+
+.btn-inverse {
+    color: #fff;
+    background-color: #333;
+}
+
+.btn-inverse:hover:hover {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+
+.screen {
+  background-color: #c3c2ab;
+}
+
+.test-red {
+  background-color: red;
+}
+
+.test-green {
+  background-color: green;
+}
+
+.test-blue {
+  background-color: blue;
+}
+
+.test-white {
+  background-color: white;
+}
+
+.test-gray {
+  background-color: gray;
+}
