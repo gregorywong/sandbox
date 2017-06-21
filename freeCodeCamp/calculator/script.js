@@ -45,12 +45,10 @@ var Calculator = function(){
 
         }
         else if (isOperation(input)) {
-          // TODO:
-
+          stack.push(input);
         }
         else if (isEqualSign(input)) {
-          // TODO:
-
+          stack.push(input);
         }
       }
       else if (isFloat(last)) {
@@ -72,30 +70,36 @@ var Calculator = function(){
       }
       else if (isOperation(last)) {
         if (isSingleDigit(input)) {
-          // TODO:
-
-          // TODO: division by zero not allowed
+          if (last == '/' && input == '0') {
+            // division by zero not allowed
+          }
+          else {
+            stack.push(input);
+          }
         }
         else if (isDecimal(input)) {
-          // TODO:
-
+          stack.push('0.');
         }
         // do nothing if isOperation or isEqualSign
-
       }
       else if (isEqualSign(last)) {
         if (isSingleDigit(input)) {
-          clearAll();
-          // TODO:
-          // TODO: eval to make sure 0 is not repeated - so that you'll not get e.g., 00000
-
+          // empty stack and add input to it
+          stack = [input];
         }
         else if (isDecimal(input)) {
-          clearAll();
-          // TODO:
+          // empty stack and add '0.' to it
+          stack = ['0.'];
         }
         else if (isOperation(input)) {
+          stack.pop(); // should be '='
+          var string = stack.join('');
+          var result = eval(eval(string).toPrecision(topDigitLimit)).toString();
 
+          console.log(result);
+          console.log(input);
+          // empty stack except for the result from the last calculation and add the operation
+          stack = [result, input];
         }
         // do nothing if isEqualSign
       }
@@ -124,8 +128,8 @@ var Calculator = function(){
     }
 
     // for people who are used to 'x' over '*'
-    topDisplay.replace("*", "x");
-    bottomDisplay.replace("*", "x");
+    topDisplay = topDisplay.replace("*", "x");
+    bottomDisplay = bottomDisplay.replace("*", "x");
 
     return [topDisplay, bottomDisplay];
   }
@@ -139,7 +143,7 @@ var Calculator = function(){
       clearAll();
     }
     else {
-      // TODO:
+      stack.pop();
     }
   }
 
@@ -186,29 +190,57 @@ $(document).ready(function() {
 
 // test suite
 var myTestCalc = new Calculator();
-var myTestStrings = [
-  ['1+1=','2'],
-  ['1+2=','3'],
-  ['1+3=','4'],
-  ['1+4=','5'],
+var myTestCases = [
+  [
+    ['1+1=','2'],
+    ['1+2=','3'],
+    ['1+3=','4'],
+    ['1+4=','5'],
+    ['1+2+3+4+5=','15'],
+    // ['000000','0','0=0'],
+    // ['000000=','0','0=0'],
+  ],
+  [
+    ['000000=','0','0=0'],
+  ],
+  [
+    ['000000','0','0=0'],
+  ],
+
 ];
-for (var i = 0; i < myTestStrings.length; i++) {
-  var input = myTestStrings[i][0];
-  var expected = myTestStrings[i][1];
-  var output;
-  for (var i = 0; i < input.length; i++) {
-    output = myTestCalc.keyPress(input[i]);
-  }
-  if (output[0] != expected) {
-    console.error("Failed test:");
-    console.log("Input: " + input);
-    console.log("Expected Output: " + expected);
-    console.log("Actual Output: " + output[0]);
-  }
-  if (output[1] != input+expected) {
-    console.error("Failed test:");
-    console.log("Input: " + input);
-    console.log("Expected Combined Output: " + input+expected);
-    console.log("Actual Output: " + output[1]);
+for (var i = 0; i < myTestCases.length; i++) {
+  var testStrings = myTestCases[i];
+  for (var i = 0; i < testStrings.length; i++) {
+    var testString = testStrings[i];
+    var input = testString[0];
+    var expectedTop = testString[1];
+    var expectedBottom = testString[2];
+    var output;
+    for (var i = 0; i < input.length; i++) {
+      output = myTestCalc.keyPress(input[i]);
+      var actualTop = output[0];
+      var actualBottom = output[1];
+    }
+    // comparing against single number result
+    if (actualTop != expectedTop) {
+      console.error("Failed test (single number result): " + expectedTop);
+      console.log("Input: " + input);
+      console.log("Expected single number result: " + expectedTop);
+      console.log("Actual Top Display: " + actualTop);
+    }
+    // comparing against expected bottom display (if available)
+    if (expectedBottom && expectedBottom != actualBottom) {
+      console.error("Failed test (expected bottom display): " + expectedBottom);
+      console.log("Input: " + input);
+      console.log("Expected Bottom Display: " + expectedBottom);
+      console.log("Actual Bottom Display: " + actualBottom);
+    }
+    // no expected bottom display given; comparing against generated bottom display
+    else if (actualBottom != input+expectedTop) {
+      console.error("Failed test (generated bottom display): " + input+expectedTop);
+      console.log("Input: " + input);
+      console.log("Expected Combined Output: " + input+expectedTop);
+      console.log("Actual Bottom Display: " + actualBottom);
+    }
   }
 }
