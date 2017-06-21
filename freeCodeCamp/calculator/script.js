@@ -41,8 +41,8 @@ var Calculator = function(){
           }
         }
         else if (isDecimal(input)) {
-          // TODO:
-
+          var popped = stack.pop();
+          stack.push(last + input);
         }
         else if (isOperation(input)) {
           stack.push(input);
@@ -54,16 +54,14 @@ var Calculator = function(){
       else if (isFloat(last)) {
         // Don't use eval() for floats. We want to keep the extra . if it's included (e.g., 2. instead of 2)
         if (isSingleDigit(input)) {
-          // TODO:
-
+          var popped = stack.pop();
+          stack.push(last + input);
         }
         else if (isOperation(input)) {
-          // TODO:
-
+          stack.push(input);
         }
         else if (isEqualSign(input)) {
-          // TODO:
-
+          stack.push(input);
         }
         // do nothing if isDecimal
 
@@ -71,7 +69,7 @@ var Calculator = function(){
       else if (isOperation(last)) {
         if (isSingleDigit(input)) {
           if (last == '/' && input == '0') {
-            // division by zero not allowed
+            // do nothing, as division by zero is not allowed
           }
           else {
             stack.push(input);
@@ -129,7 +127,7 @@ var Calculator = function(){
 
     // for people who are used to 'x' over '*'
     topDisplay = topDisplay.replace("*", "x");
-    bottomDisplay = bottomDisplay.replace("*", "x");
+    bottomDisplay = bottomDisplay.replace(/\*/g, "x");
 
     return [topDisplay, bottomDisplay];
   }
