@@ -4,15 +4,8 @@ html, body {
   font-family: "PT Mono","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
 
-button {
-  font-family: "PT Mono","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-}
-
 .title {
   font-family: Roboto,"Helvetica Neue",Arial,sans-serif;
-}
-
-.tall-button {
 }
 
 .px-4-5 {
@@ -24,11 +17,8 @@ button {
   padding-bottom: 2.3rem!important;
 }
 
-.super-rounded {
-  border-radius: 20px;
-}
-
 .calculator-body {
+  border-radius: 20px;
   background-color: gray;
   box-shadow: 0px 0px 1px 0px white, inset 0px 0px 15px 0px black;
 }
@@ -38,23 +28,38 @@ button {
 }
 
 .btn-inverse {
-    color: #fff;
-    background-color: #333;
+  color: #fff;
+  background-color: #333;
 }
 
 .btn-inverse:hover:hover {
-    color: #333;
-    background-color: #e6e6e6;
-    border-color: #adadad;
+  color: #fff;
+  background-color: #222;
+  border-color: #adadad;
 }
 
-/* Modifications to Bootstrap */
+/* Modifications to Bootstrap classes */
 .btn {
+  font-family: "PT Mono","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   box-shadow: inset 0px 1px 7px 0px gray;
   border-style: none;
+  -webkit-transition-duration: 0s;
+  -moz-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  transition-duration: 0s;
+}
+
+.btn:active {
+  box-shadow: inset 0px 0px 1px 3px white!important;
+}
+
+.btn:focus {
+  /* to modify default behavior of outlining buttons after they've been clicked */
+  outline: none!important;
+  box-shadow: inset 0px 1px 7px 0px gray;
 }
 
 .btn-danger {
   box-shadow: inset 0px 1px 7px 0px #e07774;
 }
-/* End of Modifications to Bootstrap */
+/* End of Modifications to Bootstrap classes */
