@@ -1,3 +1,4 @@
+// extra function to access the last element of an array
 if (!Array.prototype.peek){
   Array.prototype.peek = function(){
     return this[this.length - 1];
@@ -182,3 +183,32 @@ $(document).ready(function() {
     $("#bottomDisplay").text(result[1]);
   });
 });
+
+// test suite
+var myTestCalc = new Calculator();
+var myTestStrings = [
+  ['1+1=','2'],
+  ['1+2=','3'],
+  ['1+3=','4'],
+  ['1+4=','5'],
+];
+for (var i = 0; i < myTestStrings.length; i++) {
+  var input = myTestStrings[i][0];
+  var expected = myTestStrings[i][1];
+  var output;
+  for (var i = 0; i < input.length; i++) {
+    output = myTestCalc.keyPress(input[i]);
+  }
+  if (output[0] != expected) {
+    console.error("Failed test:");
+    console.log("Input: " + input);
+    console.log("Expected Output: " + expected);
+    console.log("Actual Output: " + output[0]);
+  }
+  if (output[1] != input+expected) {
+    console.error("Failed test:");
+    console.log("Input: " + input);
+    console.log("Expected Combined Output: " + input+expected);
+    console.log("Actual Output: " + output[1]);
+  }
+}
