@@ -189,9 +189,9 @@ $(document).ready(function() {
   // runTests();
 
   $(".btn").click(function () {
-    var result = myCalc.keyPress($(this).val());
-    $("#topDisplay").text(result[0]);
-    $("#bottomDisplay").text(result[1]);
+    var displayValues = myCalc.keyPress($(this).val());
+    $("#topDisplay").text(displayValues[0]);
+    $("#bottomDisplay").text(displayValues[1]);
   });
 });
 
