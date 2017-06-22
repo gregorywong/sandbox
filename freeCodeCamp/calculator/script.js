@@ -5,8 +5,6 @@ if (!Array.prototype.peek){
   };
 };
 
-var myCalc;
-
 var Calculator = function(){
 
   const TOP_LENGTH_LIMIT = 10;
@@ -182,11 +180,10 @@ var Calculator = function(){
   function isValidInput(str) {
     return str.match(/^[0-9.\+\-\*\/=AE]$/);
   }
-
 };
 
 $(document).ready(function() {
-  myCalc = new Calculator();
+  var myCalc = new Calculator();
 
   $(".btn").click(function () {
     var result = myCalc.keyPress($(this).val());
@@ -267,7 +264,6 @@ const MY_TEST_CASES = [
     ['A','0','0'],
     ['1+1+1+1+1+1+1+1+1+1+1','0',DIGIT_LIMIT_REACHED_MESSAGE],
   ],
-
 ];
 
 var errorCount = 0;
