@@ -9,17 +9,20 @@ var myCalc;
 
 var Calculator = function(){
 
-  const topLengthLimit = 10;
-  const topDigitLimit = 8;
-  const bottomLengthLimit = 20;
+  const TOP_LENGTH_LIMIT = 10;
+  const TOP_DIGIT_LIMIT = 8;
+  const BOTTOM_LENGTH_LIMIT = 20;
+  const DIGIT_LIMIT_REACHED_MESSAGE = "Digit Limit Reached";
   var stack = ['0'];
 
   this.keyPress = function(input) {
     // returns an array of two strings if operating normally, otherwise returns undefined
-    // is not guaranteed to return anything if not given expected input
     if (typeof input != "string") {
       console.error("typeof input is expected to be 'string', but was '" + typeof input + "'");
-      clearAll();
+      return undefined;
+    }
+    if (!isValidInput(input)) {
+      console.error("input not valid, I don't know what to do with it: '" + input + "'");
       return undefined;
     }
 
@@ -96,10 +99,10 @@ var Calculator = function(){
           var rawResult = eval(string);
           var result;
           if (rawResult >= 0) {
-            result = eval(eval(string).toPrecision(topDigitLimit)).toString();
+            result = eval(eval(string).toPrecision(TOP_DIGIT_LIMIT)).toString();
           }
           else {
-            result = eval(eval(string).toPrecision(topDigitLimit-1)).toString();
+            result = eval(eval(string).toPrecision(TOP_DIGIT_LIMIT-1)).toString();
           }
 
           // empty stack except for the result from the last calculation and add the operation
@@ -121,10 +124,10 @@ var Calculator = function(){
       var rawResult = eval(string);
       var result;
       if (rawResult >= 0) {
-        result = eval(eval(string).toPrecision(topDigitLimit)).toString();
+        result = eval(eval(string).toPrecision(TOP_DIGIT_LIMIT)).toString();
       }
       else {
-        result = eval(eval(string).toPrecision(topDigitLimit-1)).toString();
+        result = eval(eval(string).toPrecision(TOP_DIGIT_LIMIT-1)).toString();
       }
 
       topDisplay = result;
@@ -135,7 +138,7 @@ var Calculator = function(){
     if (digitLimitReached(topDisplay, bottomDisplay)) {
       clearAll();
       topDisplay = stack.peek();
-      bottomDisplay = "Digit Limit Met";
+      bottomDisplay = DIGIT_LIMIT_REACHED_MESSAGE;
     }
 
     // for people who are used to 'x' over '*'
@@ -159,7 +162,7 @@ var Calculator = function(){
   }
 
   function digitLimitReached(topDisplay, bottomDisplay) {
-    return (topDisplay.length > topLengthLimit || bottomDisplay.length > bottomLengthLimit);
+    return (topDisplay.length > TOP_LENGTH_LIMIT || bottomDisplay.length > BOTTOM_LENGTH_LIMIT);
   }
 
   function isSingleDigit(str) {
@@ -187,6 +190,10 @@ var Calculator = function(){
     return str == '=';
   }
 
+  function isValidInput(str) {
+    return str.match(/^[0-9.\+\-\*\/=AE]$/);
+  }
+
 };
 
 $(document).ready(function() {
@@ -199,11 +206,15 @@ $(document).ready(function() {
   });
 });
 
-// test suite
+/* Test Suite */
+
+/*
 var myTestCalc = new Calculator();
-var myTestCases = [
+const DIGIT_LIMIT_REACHED_MESSAGE = "Digit Limit Reached";
+const MY_TEST_CASES = [
+  // [input, expected top display, expected bottom display]
   [
-    ['a','0','0'],
+    ['A','0','0'],
     ['1+1=','2'],
     ['1+2=','3'],
     ['1+3=','4'],
@@ -213,31 +224,86 @@ var myTestCases = [
     ['000000=','0','0=0'],
   ],
   [
-    ['a','0','0'],
+    ['A','0','0'],
+    ['AAAAAAA','0','0'],
+    ['EEEEEEE','0','0'],
+  ],
+  [
+    ['A','0','0'],
+    ['1+1=','2'],
+    ['1+2=','3'],
+    ['1+3=','4'],
+    ['1+4=','5'],
+    ['1+2+3+4+5=','15'],
+    ['000000','0','0'],
+    ['000000=','0','0=0'],
+  ],
+  [
+    ['A','0','0'],
     ['0=','0','0=0'],
-    ['+2','2','0+2=2'],
+    ['+2=','2','0+2=2'],
+    ['+3=','5','2+3=5'],
+  ],
+  [
+    ['A','0','0'],
+    ['1+2+3+4','4','1+2+3+4'],
+    ['E','+','1+2+3+'],
+    ['E','3','1+2+3'],
+    ['E','+','1+2+'],
+    ['E','2','1+2'],
+    ['E','+','1+'],
+    ['E','1','1'],
+    ['E','0','0'],
+  ],
+  [
+    ['A','0','0'],
+    ['1/9','9','1/9'],
+    ['=','0.11111111','1/9=0.11111111'],
+    ['=','0.11111111','1/9=0.11111111'],
+    ['=','0.11111111','1/9=0.11111111'],
+    ['1/9+1/9','9','1/9+1/9'],
+    ['=','0.22222222','1/9+1/9=0.22222222'],
+  ],
+  [
+    ['A','0','0'],
+    ['1234567890','1234567890','1234567890'],
+    ['*10','10','1234567890x10'],
+    ['=','0', DIGIT_LIMIT_REACHED_MESSAGE],
+    ['=','0', '0=0'],
+    ['12345678901', '0', DIGIT_LIMIT_REACHED_MESSAGE],
+    ['123456789011', '1', '1'],
+    ['A','0','0'],
+    ['1234567890112', '12', '12'],
+    ['A','0','0'],
+    ['1+1+1+1+1+1+1+1+1+1+','+','1+1+1+1+1+1+1+1+1+1+'],
+    ['A','0','0'],
+    ['1+1+1+1+1+1+1+1+1+1+1','0',DIGIT_LIMIT_REACHED_MESSAGE],
   ],
 
 ];
-for (var i = 0; i < myTestCases.length; i++) {
-  var testStrings = myTestCases[i];
-  for (var i = 0; i < testStrings.length; i++) {
-    var testString = testStrings[i];
+
+var errorCount = 0;
+for (var i = 0; i < MY_TEST_CASES.length; i++) {
+  var testStrings = MY_TEST_CASES[i];
+  console.log("Running test " + (i+1) + " of " + MY_TEST_CASES.length);
+  for (var j = 0; j < testStrings.length; j++) {
+    var testString = testStrings[j];
     var input = testString[0];
     var expectedTop = testString[1];
     var expectedBottom = testString[2];
     var output;
-    for (var i = 0; i < input.length; i++) {
-      output = myTestCalc.keyPress(input[i]);
-      var actualTop = output[0];
-      var actualBottom = output[1];
+    for (var k = 0; k < input.length; k++) {
+      output = myTestCalc.keyPress(input[k]);
     }
+    var actualTop = output[0];
+    var actualBottom = output[1];
     // comparing against single number result
     if (actualTop != expectedTop) {
       console.error("Failed test (single number result): " + expectedTop);
       console.log("Input: " + input);
       console.log("Expected single number result: " + expectedTop);
       console.log("Actual Top Display: " + actualTop);
+      errorCount++;
     }
     // comparing against expected bottom display (if available)
     if (expectedBottom) {
@@ -246,14 +312,20 @@ for (var i = 0; i < myTestCases.length; i++) {
         console.log("Input: " + input);
         console.log("Expected Bottom Display: " + expectedBottom);
         console.log("Actual Bottom Display: " + actualBottom);
+        errorCount++;
       }
     }
     // no expected bottom display given; comparing against generated bottom display
-    else if (actualBottom != input+expectedTop) {
-      console.error("Failed test (generated bottom display): " + input+expectedTop);
-      console.log("Input: " + input);
-      console.log("Expected Combined Output: " + input+expectedTop);
-      console.log("Actual Bottom Display: " + actualBottom);
+    else {
+      if (actualBottom != input+expectedTop) {
+        console.error("Failed test (generated bottom display): " + input+expectedTop);
+        console.log("Input: " + input);
+        console.log("Expected Combined Output: " + input+expectedTop);
+        console.log("Actual Bottom Display: " + actualBottom);
+        errorCount++;
+      }
     }
   }
 }
+console.log("Finished running " + MY_TEST_CASES.length + " tests with " + errorCount + " total errors.");
+*/
