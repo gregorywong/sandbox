@@ -94,16 +94,7 @@ var Calculator = function(){
           stack = ['0.'];
         }
         else if (isOperation(input)) {
-          stack.pop(); // should be '='
-          var string = stack.join('');
-          var rawResult = eval(string);
-          var result;
-          if (rawResult >= 0) {
-            result = eval(eval(string).toPrecision(TOP_DIGIT_LIMIT)).toString();
-          }
-          else {
-            result = eval(eval(string).toPrecision(TOP_DIGIT_LIMIT-1)).toString();
-          }
+          result = calculateTopValue();
 
           // empty stack except for the result from the last calculation and add the operation
           stack = [result, input];
@@ -115,23 +106,21 @@ var Calculator = function(){
     return getDisplayValues();
   };
 
+  function calculateTopValue() {
+    // assume last value in stack is '='
+    var string = stack.slice(0,stack.length-1).join(''); // without last '='
+    var rawResult = eval(string);
+    var digits = rawResult >= 0 ? TOP_DIGIT_LIMIT : TOP_DIGIT_LIMIT - 1;
+    return eval(eval(string).toPrecision(digits)).toString();
+  }
+
   function getDisplayValues() {
     var topDisplay = stack.peek();
     var bottomDisplay = stack.join('');
 
     if (isEqualSign(topDisplay)){
-      var string = stack.slice(0,stack.length-1).join(''); // without last '='
-      var rawResult = eval(string);
-      var result;
-      if (rawResult >= 0) {
-        result = eval(eval(string).toPrecision(TOP_DIGIT_LIMIT)).toString();
-      }
-      else {
-        result = eval(eval(string).toPrecision(TOP_DIGIT_LIMIT-1)).toString();
-      }
-
-      topDisplay = result;
-      bottomDisplay = string + "=" + result;
+      topDisplay = calculateTopValue();
+      bottomDisplay += topDisplay;
     }
 
     // check if screen can still accommodate displayed text
@@ -208,7 +197,6 @@ $(document).ready(function() {
 
 /* Test Suite */
 
-/*
 var myTestCalc = new Calculator();
 const DIGIT_LIMIT_REACHED_MESSAGE = "Digit Limit Reached";
 const MY_TEST_CASES = [
@@ -328,4 +316,3 @@ for (var i = 0; i < MY_TEST_CASES.length; i++) {
   }
 }
 console.log("Finished running " + MY_TEST_CASES.length + " tests with " + errorCount + " total errors.");
-*/
