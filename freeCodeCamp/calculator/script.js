@@ -203,19 +203,19 @@ $(document).ready(function() {
 var myTestCalc = new Calculator();
 var myTestCases = [
   [
+    ['a','0','0'],
     ['1+1=','2'],
     ['1+2=','3'],
     ['1+3=','4'],
     ['1+4=','5'],
     ['1+2+3+4+5=','15'],
-    // ['000000','0','0=0'],
-    // ['000000=','0','0=0'],
-  ],
-  [
+    ['000000','0','0'],
     ['000000=','0','0=0'],
   ],
   [
-    ['000000','0','0=0'],
+    ['a','0','0'],
+    ['0=','0','0=0'],
+    ['+2','2','0+2=2'],
   ],
 
 ];
@@ -240,11 +240,13 @@ for (var i = 0; i < myTestCases.length; i++) {
       console.log("Actual Top Display: " + actualTop);
     }
     // comparing against expected bottom display (if available)
-    if (expectedBottom && expectedBottom != actualBottom) {
-      console.error("Failed test (expected bottom display): " + expectedBottom);
-      console.log("Input: " + input);
-      console.log("Expected Bottom Display: " + expectedBottom);
-      console.log("Actual Bottom Display: " + actualBottom);
+    if (expectedBottom) {
+      if (expectedBottom != actualBottom) {
+        console.error("Failed test (expected bottom display): " + expectedBottom);
+        console.log("Input: " + input);
+        console.log("Expected Bottom Display: " + expectedBottom);
+        console.log("Actual Bottom Display: " + actualBottom);
+      }
     }
     // no expected bottom display given; comparing against generated bottom display
     else if (actualBottom != input+expectedTop) {
