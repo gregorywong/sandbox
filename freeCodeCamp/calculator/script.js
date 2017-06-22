@@ -9,8 +9,9 @@ var myCalc;
 
 var Calculator = function(){
 
+  const topLengthLimit = 10;
   const topDigitLimit = 8;
-  const bottomDigitLimit = 20;
+  const bottomLengthLimit = 20;
   var stack = ['0'];
 
   this.keyPress = function(input) {
@@ -22,10 +23,10 @@ var Calculator = function(){
       return undefined;
     }
 
-    if (input == "clearEntry") {
+    if (input == "E") { // clear entry
       clearEntry();
     }
-    else if (input == "clearAll"){
+    else if (input == "A"){ // clear all
       clearAll();
     }
     else { // input is digit, decimal, operation, or equal sign
@@ -92,10 +93,15 @@ var Calculator = function(){
         else if (isOperation(input)) {
           stack.pop(); // should be '='
           var string = stack.join('');
-          var result = eval(eval(string).toPrecision(topDigitLimit)).toString();
+          var rawResult = eval(string);
+          var result;
+          if (rawResult >= 0) {
+            result = eval(eval(string).toPrecision(topDigitLimit)).toString();
+          }
+          else {
+            result = eval(eval(string).toPrecision(topDigitLimit-1)).toString();
+          }
 
-          console.log(result);
-          console.log(input);
           // empty stack except for the result from the last calculation and add the operation
           stack = [result, input];
         }
@@ -112,7 +118,14 @@ var Calculator = function(){
 
     if (isEqualSign(topDisplay)){
       var string = stack.slice(0,stack.length-1).join(''); // without last '='
-      var result = eval(eval(string).toPrecision(topDigitLimit)).toString();
+      var rawResult = eval(string);
+      var result;
+      if (rawResult >= 0) {
+        result = eval(eval(string).toPrecision(topDigitLimit)).toString();
+      }
+      else {
+        result = eval(eval(string).toPrecision(topDigitLimit-1)).toString();
+      }
 
       topDisplay = result;
       bottomDisplay = string + "=" + result;
@@ -146,7 +159,7 @@ var Calculator = function(){
   }
 
   function digitLimitReached(topDisplay, bottomDisplay) {
-    return (topDisplay.length > topDigitLimit || bottomDisplay.length > bottomDigitLimit);
+    return (topDisplay.length > topLengthLimit || bottomDisplay.length > bottomLengthLimit);
   }
 
   function isSingleDigit(str) {
