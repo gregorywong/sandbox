@@ -196,6 +196,7 @@ $(document).ready(function() {
 });
 
 /* Test Suite */
+/* ********** */
 
 var runTests = function () {
   var myTestCalc = new Calculator();
