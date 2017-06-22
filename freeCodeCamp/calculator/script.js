@@ -196,7 +196,7 @@ $(document).ready(function() {
 /* ********** */
 
 // uncomment to run test suite
-runTests();
+// runTests();
 
 function runTests() {
 
