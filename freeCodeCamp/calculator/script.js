@@ -161,7 +161,7 @@ var Calculator = function(){
   }
 
   function isFloat(str) {
-    // does not work for negative floats
+    // does not take into account negative floats
     return str.match(/^\d+[.]\d*$/) !== null;
   }
 
