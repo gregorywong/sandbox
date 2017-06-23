@@ -1,6 +1,9 @@
 var CountDown = function(sec, tickCallback, timesUpCallback) {
-  var setSeconds = sec < 0 ? 0 : sec;
+  const MAX_SEC = 5999;
+  var setSeconds = sec;
+  validateSetSeconds(); // change it to a suitable value if necessary
   var seconds = setSeconds;
+  console.log(seconds);
   var timerID = null;
   var tickCallback = tickCallback;
   var timesUpCallback = timesUpCallback;
@@ -8,7 +11,8 @@ var CountDown = function(sec, tickCallback, timesUpCallback) {
 
   this.set = function(sec) {
     if (!timerID) { // can't set it while it's running
-      setSeconds = sec < 0 ? 0 : sec; // can't set it to less than 0
+      setSeconds = sec;
+      validateSetSeconds();
       seconds = setSeconds;
     }
   };
@@ -26,6 +30,15 @@ var CountDown = function(sec, tickCallback, timesUpCallback) {
   this.stop = function() {
     stop();
   };
+
+  function validateSetSeconds() {
+    if (setSeconds < 0) {
+      setSeconds = 0;
+    }
+    else if (setSeconds > MAX_SEC) {
+      setSeconds = MAX_SEC;
+    }
+  }
 
   function tick() {
     seconds--;
@@ -45,20 +58,30 @@ var CountDown = function(sec, tickCallback, timesUpCallback) {
   }
 };
 
+function getTimeFormat(sec) {
+  // return seconds in MM:SS format
+  var minutes = Math.floor(sec / 60);
+  minutes = minutes < 10 ? '0'+ minutes : minutes;
+  var seconds = sec % 60;
+  seconds = seconds < 10 ? '0'+ seconds : seconds;
+
+  return minutes + ":" + seconds;
+}
+
 // for testing
 window.onload = function(){
   var testSec = 5;
-  document.getElementById('seconds').innerHTML = testSec;
+  document.getElementById('timer').innerHTML = getTimeFormat(testSec);
 
   var myCountDown = new CountDown(testSec, updateDisplay, timesUp);
   myCountDown.start();
 
   function updateDisplay(sec) {
-    document.getElementById('seconds').innerHTML = sec;
+    document.getElementById('timer').innerHTML = getTimeFormat(sec);
   }
 
   function timesUp() {
-    alert('times up');
+    document.getElementById('timesup').innerHTML = "Time's up!"
   }
 
 };
