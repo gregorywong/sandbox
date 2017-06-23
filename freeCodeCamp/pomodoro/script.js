@@ -105,30 +105,37 @@ function getSuitableSeconds(sec) {
     return 59;
   }
   return sec;
-
 }
 
 $(document).ready(function() {
 
   var alarm = document.getElementById("alarm");
+  var alarmIntervalID;
+  function flashTimer() {
+    $(".display").stop().css("color", "yellow").animate({color: "black"}, 1000, stopFlash);
+  }
+
+  function stopFlash() {
+    $(".display").removeAttr('style'); // this works as I do not define styles in the html file
+  }
 
   var updateDisplay = function(sec) {
-    console.log(sec);
     var time = getMinutesAndSeconds(sec);
-    console.log(time);
     $("#minutes").val(time[0]);
     $("#seconds").val(time[1]);
   };
 
   var timesUp = function() {
     alarm.play();
-  // TODO: what happens when alarm goes off?
+    flashTimer();
+    alarmIntervalID = setInterval(flashTimer, 1000);
   };
 
   var myCountDown = new CountDown(toSeconds(25,0), updateDisplay, timesUp);
 
   $(".time-input").focusin(function(event) {
     alarm.pause(); // if it's not playing, this won't do anything
+    clearInterval(alarmIntervalID);
     myCountDown.stop();
   });
 
@@ -154,6 +161,7 @@ $(document).ready(function() {
   $("#start-stop-button").click(function(event) {
     if (myCountDown.isAlarmOn()) {
       alarm.pause();
+      clearInterval(alarmIntervalID);
       myCountDown.stop();
       updateDisplay(myCountDown.getSetSeconds());
     }
