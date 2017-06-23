@@ -45,7 +45,9 @@ var Board = function () {
   }
 
   function getWinner() {
-    // return either 'a' or 'b', or null if no winner
+    // if no winner, return null
+    // if has winner, return [winner, index1, index2, index3]
+
     var winner = getFullRows();
     if (winner) {
       return winner;
@@ -54,19 +56,21 @@ var Board = function () {
     if (winner) {
       return winner;
     }
-    // TODO: winning checks for columns and diagonals
-
+    winner = getFullDiagonals();
+    if (winner) {
+      return winner;
+    }
     return null;
   }
 
   function getFullRows() {
     // only for 3 elements
-    for (var i = 0; i < grid.length; i+=COLS) {
-      var playerAt1 = grid[i];
-      var playerAt2 = grid[i+1];
-      var playerAt3 = grid[i+2];
-      if (playerAt1 != null && playerAt1 == playerAt2 && playerAt2 == playerAt3) {
-        return [playerAt1, i, i+1, i+2];
+    for (var i = 0; i < ROWS; i++) {
+      var i1 = i * COLS;
+      var i2 = i * COLS + 1;
+      var i3 = i * COLS + 2;
+      if (grid[i1] != null && grid[i1] == grid[i2] && grid[i2] == grid[i3]) {
+        return [grid[i1], i1, i2, i3];
       }
     }
     return null;
@@ -74,13 +78,30 @@ var Board = function () {
 
   function getFullCols() {
     // only for 3 elements
-    for (var i = 0; i < ROWS; i++) {
-      var playerAt1 = grid[i];
-      var playerAt2 = grid[i + COLS];
-      var playerAt3 = grid[i + 2*COLS];
-      if (playerAt1 != null && playerAt1 == playerAt2 && playerAt2 == playerAt3) {
-        return [playerAt1, i, i+COLS, i+2*COLS];
+    for (var i = 0; i < COLS; i++) {
+      var i1 = i;
+      var i2 = i + COLS;
+      var i3 = i + 2*COLS;
+      if (grid[i1] != null && grid[i1] == grid[i2] && grid[i2] == grid[i3]) {
+        return [grid[i1], i1, i2, i3];
       }
+    }
+    return null;
+  }
+
+  function getFullDiagonals(){
+    // only for 3 elements
+    var i1 = 0;
+    var i2 = COLS + 1;
+    var i3 = 2*COLS + 2;
+    if (grid[i1] != null && grid[i1] == grid[i2] && grid[i2] == grid[i3]) {
+      return [grid[i1], i1, i2, i3];
+    }
+    var i1 = COLS - 1;
+    var i2 = 2*COLS - 2;
+    var i3 = 3*COLS - 3;
+    if (grid[i1] != null && grid[i1] == grid[i2] && grid[i2] == grid[i3]) {
+      return [grid[i1], i1, i2, i3];
     }
     return null;
   }
@@ -225,6 +246,30 @@ function runTests() {
         return winResult;
       },
       expected: ['a', 2, 5, 8]
+    },
+    {
+      name: "test winner for full diagonal top left",
+      testFunc: function (board) {
+        board.clear();
+        var winResult = null;
+        winResult = board.makeMove('a', 1, 1);
+        winResult = board.makeMove('a', 2, 2);
+        winResult = board.makeMove('a', 3, 3);
+        return winResult;
+      },
+      expected: ['a', 0, 4, 8]
+    },
+    {
+      name: "test winner for full diagonal top right",
+      testFunc: function (board) {
+        board.clear();
+        var winResult = null;
+        winResult = board.makeMove('a', 1, 3);
+        winResult = board.makeMove('a', 2, 2);
+        winResult = board.makeMove('a', 3, 1);
+        return winResult;
+      },
+      expected: ['a', 2, 4, 6]
     },
   ];
 
