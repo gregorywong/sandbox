@@ -135,6 +135,7 @@ $(document).ready(function() {
 
   $(".time-input").focusin(function(event) {
     alarm.pause(); // if it's not playing, this won't do anything
+    alarm.load();
     clearInterval(alarmIntervalID);
     myCountDown.stop();
   });
@@ -161,6 +162,7 @@ $(document).ready(function() {
   $("#start-stop-button").click(function(event) {
     if (myCountDown.isAlarmOn()) {
       alarm.pause();
+      alarm.load();
       clearInterval(alarmIntervalID);
       myCountDown.stop();
       updateDisplay(myCountDown.getSetSeconds());
