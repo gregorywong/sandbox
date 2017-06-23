@@ -1,0 +1,88 @@
+html, body {
+  position: relative;
+  height: 100%;
+}
+
+body {
+  background: url('tomato.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/* so that the background doesn't affect the look of the app on very small screens */
+@media (max-height: 480px) and (max-width: 675px) {
+  body {
+    background-size: auto 480px;
+  }
+}
+
+.text-red {
+  color: red;
+}
+
+.title {
+  font-family: 'Monoton', cursive;
+  text-shadow: 0 0 2px #000;
+}
+
+.credits {
+  font-family: 'Special Elite', cursive;
+  text-shadow: 0 0 2px #000;
+}
+
+.start-stop-button {
+  font-family: 'Cabin Sketch', cursive;
+  font-size: 1.5em;
+  color: black;
+  border-radius:25px;
+}
+
+.btn-mod:active {
+  background-color: orange;
+  color: red;
+  transform: translateY(3px);
+}
+
+.btn-mod:focus {
+  /* modifies default behavior of outlining buttons upon being clicked */
+  outline: 0 none!important;
+  box-shadow: none;
+}
+
+input {
+  background: transparent;
+  width: 1.8em;
+  font-family: monospace;
+  font-size: 4em;
+  border: 0;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none !important;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input:hover {
+  color: orange;
+  border-color: orange;
+  text-shadow: 0 0 1px #000;
+}
+
+input:focus {
+  color: yellow;
+  border-color: yellow;
+}
+
+input:focus {
+  outline: 0 none!important;
+}
+
+.display {
+  font-family: 'Monoton', cursive;
+}
