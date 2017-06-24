@@ -15,6 +15,7 @@ body {
 @media (max-height: 480px) and (max-width: 675px) {
   body {
     background-size: auto 480px;
+    background-attachment: scroll;
   }
 }
 
