@@ -3,19 +3,35 @@
 // User Story: I can choose whether I want to play as X or O.
 
 var Board = function() {
-  var grid;
   const ROWS = 3;
   const COLS = 3;
-  const SPACES = ROWS * COLS;
-  var count = 0;
-  init();
+  var grid = Array(ROWS*COLS).fill(null);
 
-  this.makeMove = function(player, row, col) {
-    // player is either 'x' or 'o'
+  const SPACES = ROWS * COLS;
+  var turns;
+
+  var wins;
+
+  var p1, p2, currPlayer;
+
+  this.init = function(p1sym) {
+    init(p1sym);
+  };
+
+  this.getCurrentPlayer = function() {
+    return currPlayer;
+  };
+
+  this.makeMove = function(row, col) {
+    // currPlayer is either 'x' or 'o'
     // row and col are 1 based
     // return false if problems encountered, else true
-    if (player != 'x' && player != 'o') {
-      console.error("player must have value of either 'x' or 'o'");
+    if (p1 == undefined) {
+      console.error("init() not called yet");
+      return false;
+    }
+    if (isFull() || hasWinner()) {
+      console.error("game over, call init() again");
       return false;
     }
     if (row < 1 || row > ROWS || col < 1 || col > COLS) {
@@ -23,11 +39,14 @@ var Board = function() {
       return false;
     }
     var i = getGridIndex(row, col);
-    if (grid[i] != null) {
+    if (grid[i] != null) { // if grid is already occupied
       return false;
     }
-    grid[i] = player;
-    count++;
+    grid[i] = currPlayer;
+    updateWinner();
+    turns++;
+    // switch to other player's turn
+    currPlayer = currPlayer == p1 ? p2 : p1;
     return true;
   };
 
@@ -35,40 +54,53 @@ var Board = function() {
     return grid.slice(); // return a copy so that it can't be modified
   };
 
-  this.clear = function() {
-    init();
-  };
-
   this.isFull = function() {
-    return count >= SPACES;
+    return isFull();
   };
 
   this.getWinner = function() {
-    // if no winner, return null
-    // if has winner, return [winner, index1, index2, index3]
-
-    var winner = getFullRows();
-    if (winner) {
-      return winner;
-    }
-    winner = getFullCols();
-    if (winner) {
-      return winner;
-    }
-    winner = getFullDiagonals();
-    if (winner) {
-      return winner;
-    }
-    return null;
+    return wins;
   };
 
-
-  function init() {
-    grid = Array(ROWS*COLS).fill(null);
+  function init(p1sym) {
+    turns = 0;
+    wins = [];
+    grid.fill(null);
+    if (p1sym == 'o') {
+      p1 = 'o';
+      p2 = 'x';
+    }
+    else {
+      p1 = 'x';
+      p2 = 'o';
+    }
+    currPlayer = p1;
   }
 
   function getGridIndex(row, col) {
     return(row-1)*COLS + (col-1);
+  }
+
+  function updateWinner () {
+    // if no winner, wins is []
+    // if has winner, wins is [ [winner, index1, index2, index3], ... ]
+
+    var winner = getFullRows();
+    if (winner) {
+      wins.push(winner);
+    }
+    winner = getFullCols();
+    if (winner) {
+      wins.push(winner);
+    }
+    winner = getFullDiagonals();
+    if (winner) {
+      wins.push(winner);
+    }
+  }
+
+  function hasWinner() {
+    return wins.length > 0;
   }
 
   function getFullRows() {
@@ -114,4 +146,7 @@ var Board = function() {
     return null;
   }
 
+  function isFull() {
+    return turns >= SPACES;
+  }
 };
