@@ -22,9 +22,9 @@ var Board = function() {
     return currPlayer;
   };
 
-  this.makeMove = function(row, col) {
+  this.makeMove = function(index) {
     // currPlayer is either 'x' or 'o'
-    // row and col are 1 based
+    // index is from 0 - 8
     // return false if problems encountered, else true
     if (p1 == undefined) {
       console.error("init() not called yet");
@@ -34,20 +34,24 @@ var Board = function() {
       console.error("game over, call init() again");
       return false;
     }
-    if (row < 1 || row > ROWS || col < 1 || col > COLS) {
-      console.error("row and col given are either smaller than 1 or more than what is allowed");
+    if (index < 0 || index > 8) {
+      console.error("index should be a number between 0 and 8 (inclusive)");
       return false;
     }
-    var i = getGridIndex(row, col);
-    if (grid[i] != null) { // if grid is already occupied
+    if (grid[index] != null) { // if grid is already occupied
       return false;
     }
-    grid[i] = currPlayer;
+    grid[index] = currPlayer;
     updateWinner();
     turns++;
     // switch to other player's turn
     currPlayer = currPlayer == p1 ? p2 : p1;
     return true;
+  };
+
+  this.makeMoveByRowCol = function(row, col) {
+    var i = getGridIndex(row, col);
+    return this.makeMove(i); // true if successful, false otherwise
   };
 
   this.getGrid = function() {

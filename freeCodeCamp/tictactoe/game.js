@@ -12,12 +12,12 @@ var Game = function(animateMakeMove, animateWin, displayWinningMessage, displayT
     aiModeOn = isSinglePlayer;
   };
 
-  this.makeMove = function(row, col) {
+  this.makeMove = function(index) {
     if (board.getCurrentPlayer() == undefined) {
       console.error("init() not called yet");
       return false;
     }
-    makeMove(row, col); // returns true for valid move
+    makeMove(index); // returns true for valid move
 
     AIMove();
   };
@@ -30,9 +30,9 @@ var Game = function(animateMakeMove, animateWin, displayWinningMessage, displayT
     return currPlayer;
   };
 
-  function makeMove(row, col, byAI=false) {
+  function makeMove(index, byAI=false) {
     var currPlayer = board.getCurrentPlayer();
-    var valid = board.makeMove(row, col);
+    var valid = board.makeMove(index);
     if (!valid){
       return false;
     }
@@ -63,8 +63,15 @@ var Game = function(animateMakeMove, animateWin, displayWinningMessage, displayT
   }
 
   function AIMove(){
-    var row, col;
-    // TODO:
-    makeMove(row, col, true);
+    // TODO: make it not random later on
+    var grid = board.getGrid();
+    var nextMove;
+    for (var i = 0; i < grid.length; i++) {
+      if (grid[i] == null) {
+        nextMove = i;
+        break;
+      }
+    }
+    makeMove(nextMove, true);
   }
 };

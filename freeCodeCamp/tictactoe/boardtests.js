@@ -16,7 +16,7 @@ function runBoardTests() {
       name: "test making one move",
       testFunc: function(board) {
         board.init('x');
-        board.makeMove(1, 1); // x
+        board.makeMoveByRowCol(1, 1); // x
         return board.getGrid();
       },
       expected: ['x', null, null, null, null, null, null, null, null],
@@ -25,9 +25,9 @@ function runBoardTests() {
       name: "test making multiple moves",
       testFunc: function(board) {
         board.init('x');
-        board.makeMove(1, 1); // x
-        board.makeMove(1, 2); // o
-        board.makeMove(1, 3); // x
+        board.makeMoveByRowCol(1, 1); // x
+        board.makeMoveByRowCol(1, 2); // o
+        board.makeMoveByRowCol(1, 3); // x
         return board.getGrid();
       },
       expected: ['x', 'o', 'x', null, null, null, null, null, null],
@@ -36,10 +36,10 @@ function runBoardTests() {
       name: "test making multiple moves - test 2",
       testFunc: function(board) {
         board.init('x');
-        board.makeMove(1, 1); // x
-        board.makeMove(1, 2);
-        board.makeMove(2, 1); // x
-        board.makeMove(2, 2);
+        board.makeMoveByRowCol(1, 1); // x
+        board.makeMoveByRowCol(1, 2);
+        board.makeMoveByRowCol(2, 1); // x
+        board.makeMoveByRowCol(2, 2);
         return board.getGrid();
       },
       expected: ['x', 'o', null, 'x', 'o', null, null, null, null],
@@ -48,8 +48,8 @@ function runBoardTests() {
       name: "test no winner",
       testFunc: function(board) {
         board.init('x');
-        board.makeMove(1, 1); // x
-        board.makeMove(1, 2);
+        board.makeMoveByRowCol(1, 1); // x
+        board.makeMoveByRowCol(1, 2);
         return board.getWinner();
       },
       expected: [],
@@ -58,11 +58,11 @@ function runBoardTests() {
       name: "test winner for full row 1",
       testFunc: function(board) {
         board.init('x');
-        board.makeMove(1, 1); // x
-        board.makeMove(2, 1);
-        board.makeMove(1, 2); // x
-        board.makeMove(2, 2);
-        board.makeMove(1, 3); // x
+        board.makeMoveByRowCol(1, 1); // x
+        board.makeMoveByRowCol(2, 1);
+        board.makeMoveByRowCol(1, 2); // x
+        board.makeMoveByRowCol(2, 2);
+        board.makeMoveByRowCol(1, 3); // x
         return board.getWinner();
       },
       expected: [['x', 0, 1, 2],]
@@ -71,11 +71,11 @@ function runBoardTests() {
       name: "test winner for full row 2",
       testFunc: function(board) {
         board.init('o');
-        board.makeMove(2, 1); // o
-        board.makeMove(1, 1);
-        board.makeMove(2, 2); // o
-        board.makeMove(1, 2);
-        board.makeMove(2, 3); // o
+        board.makeMoveByRowCol(2, 1); // o
+        board.makeMoveByRowCol(1, 1);
+        board.makeMoveByRowCol(2, 2); // o
+        board.makeMoveByRowCol(1, 2);
+        board.makeMoveByRowCol(2, 3); // o
         return board.getWinner();
       },
       expected: [['o', 3, 4, 5],]
@@ -84,11 +84,11 @@ function runBoardTests() {
       name: "test winner for full row 3",
       testFunc: function(board) {
         board.init('x');
-        board.makeMove(3, 1); // x
-        board.makeMove(2, 1);
-        board.makeMove(3, 2); // x
-        board.makeMove(2, 2);
-        board.makeMove(3, 3); // x
+        board.makeMoveByRowCol(3, 1); // x
+        board.makeMoveByRowCol(2, 1);
+        board.makeMoveByRowCol(3, 2); // x
+        board.makeMoveByRowCol(2, 2);
+        board.makeMoveByRowCol(3, 3); // x
         return board.getWinner();
       },
       expected: [['x', 6, 7, 8]]
@@ -97,11 +97,11 @@ function runBoardTests() {
       name: "test winner for full col 1",
       testFunc: function(board) {
         board.init('x');
-        board.makeMove(1, 1); // x
-        board.makeMove(1, 2);
-        board.makeMove(2, 1); // x
-        board.makeMove(2, 2);
-        board.makeMove(3, 1); // x
+        board.makeMoveByRowCol(1, 1); // x
+        board.makeMoveByRowCol(1, 2);
+        board.makeMoveByRowCol(2, 1); // x
+        board.makeMoveByRowCol(2, 2);
+        board.makeMoveByRowCol(3, 1); // x
         return board.getWinner();
       },
       expected: [['x', 0, 3, 6]]
@@ -110,11 +110,11 @@ function runBoardTests() {
       name: "test winner for full col 2",
       testFunc: function(board) {
         board.init('x');
-        board.makeMove(1, 2); // x
-        board.makeMove(1, 1);
-        board.makeMove(2, 2); // x
-        board.makeMove(2, 1);
-        board.makeMove(3, 2); // x
+        board.makeMoveByRowCol(1, 2); // x
+        board.makeMoveByRowCol(1, 1);
+        board.makeMoveByRowCol(2, 2); // x
+        board.makeMoveByRowCol(2, 1);
+        board.makeMoveByRowCol(3, 2); // x
         return board.getWinner();
       },
       expected: [['x', 1, 4, 7]]
@@ -123,11 +123,11 @@ function runBoardTests() {
       name: "test winner for full col 3",
       testFunc: function(board) {
         board.init('x');
-        board.makeMove(1, 3); // x
-        board.makeMove(1, 1);
-        board.makeMove(2, 3); // x
-        board.makeMove(2, 1);
-        board.makeMove(3, 3); // x
+        board.makeMoveByRowCol(1, 3); // x
+        board.makeMoveByRowCol(1, 1);
+        board.makeMoveByRowCol(2, 3); // x
+        board.makeMoveByRowCol(2, 1);
+        board.makeMoveByRowCol(3, 3); // x
 
         return board.getWinner();
       },
@@ -137,11 +137,11 @@ function runBoardTests() {
       name: "test winner for full diagonal top left",
       testFunc: function(board) {
         board.init('x');
-        board.makeMove(1, 1); // x
-        board.makeMove(1, 3);
-        board.makeMove(2, 2); // x
-        board.makeMove(2, 3);
-        board.makeMove(3, 3); // x
+        board.makeMoveByRowCol(1, 1); // x
+        board.makeMoveByRowCol(1, 3);
+        board.makeMoveByRowCol(2, 2); // x
+        board.makeMoveByRowCol(2, 3);
+        board.makeMoveByRowCol(3, 3); // x
         return board.getWinner();
       },
       expected: [['x', 0, 4, 8]]
@@ -150,11 +150,11 @@ function runBoardTests() {
       name: "test winner for full diagonal top right",
       testFunc: function(board) {
         board.init('x');
-        board.makeMove(1, 3); // x
-        board.makeMove(1, 1);
-        board.makeMove(2, 2); // x
-        board.makeMove(2, 1);
-        board.makeMove(3, 1); // x
+        board.makeMoveByRowCol(1, 3); // x
+        board.makeMoveByRowCol(1, 1);
+        board.makeMoveByRowCol(2, 2); // x
+        board.makeMoveByRowCol(2, 1);
+        board.makeMoveByRowCol(3, 1); // x
         return board.getWinner();
       },
       expected: [['x', 2, 4, 6]]
@@ -163,15 +163,15 @@ function runBoardTests() {
       name: "test isFull",
       testFunc: function(board) {
         board.init('x');
-        board.makeMove(1, 1); // x
-        board.makeMove(1, 2);
-        board.makeMove(1, 3); // x
-        board.makeMove(2, 1);
-        board.makeMove(2, 3); // x
-        board.makeMove(2, 2);
-        board.makeMove(3, 1); // x
-        board.makeMove(3, 3);
-        board.makeMove(3, 2); // x
+        board.makeMoveByRowCol(1, 1); // x
+        board.makeMoveByRowCol(1, 2);
+        board.makeMoveByRowCol(1, 3); // x
+        board.makeMoveByRowCol(2, 1);
+        board.makeMoveByRowCol(2, 3); // x
+        board.makeMoveByRowCol(2, 2);
+        board.makeMoveByRowCol(3, 1); // x
+        board.makeMoveByRowCol(3, 3);
+        board.makeMoveByRowCol(3, 2); // x
         return board.isFull();
       },
       expected: true
