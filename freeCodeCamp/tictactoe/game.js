@@ -63,7 +63,8 @@ var Game = function(animateMakeMove, animateWin, displayWinningMessage, displayT
   }
 
   function AIMove(){
-    // TODO: make it not random later on
+    // right now, it only picks the next empty spot
+    // TODO: make it a proper strategy later on
     var grid = board.getGrid();
     var nextMove;
     for (var i = 0; i < grid.length; i++) {
