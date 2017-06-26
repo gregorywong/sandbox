@@ -62,6 +62,10 @@ var Board = function() {
     return wins;
   };
 
+  this.getP1Symbol = function() {
+    return p1;
+  }
+
   function init(p1sym) {
     turns = 0;
     wins = [];
