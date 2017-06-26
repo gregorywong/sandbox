@@ -1,4 +1,29 @@
 html, body {
   height: 100%;
-  background-color: black;
+  background-color: white;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.jumbotron-mod {
+  /* background-color: #DFE5D1; */
+  background-color: #F3E5D1;
+  margin-bottom: 0px!important;
+}
+
+.gridblock {
+  width: 100px;
+  height: 100px;
+}
+
+.border-on-top {
+  border-top: 5px solid black;
+}
+
+.border-on-right {
+  border-right: 5px solid black;
+}
+
+.tally {
+  font-size: 6em;
+  line-height: 75%;
 }

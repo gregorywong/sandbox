@@ -1,24 +1,78 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Tic Tac Toe</title>
+  <title>Tic Tac Toe</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" media="screen" href="style.css" />
+  <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" media="screen" href="style.css" />
 
-    <script type="text/javascript" src="board.js"></script>
-    <script type="text/javascript" src="game.js"></script>
-    <script type="text/javascript" src="boardtests.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 
-  </head>
-  <body>
-    Testing javascript only. Open console to see logs to console (if available).
-  </body>
-  </html>
+  <script type="text/javascript" src="board.js"></script>
+  <script type="text/javascript" src="game.js"></script>
+  <script type="text/javascript" src="boardtests.js"></script>
+
+</head>
+
+<body>
+
+  <!-- hyperlinks: target="_blank" for codepen.io -->
+
+  <div class="container jumbotron jumbotron-mod h-100">
+    <div class="row h-100 justify-content-center align-items-between">
+      <div class="col-12 text-center">
+        <h1 class="mt-2">Tic Tac Toe</h1>
+      </div>
+
+      <div class="col-12 text-center my-auto">
+        <div class="row justify-content-center">
+          <div class="p-0 gridblock border-on-right">
+            <span class="tally">x</span>
+          </div>
+          <div class="p-0 gridblock border-on-right">
+            <span class="tally">o</span>
+          </div>
+          <div class="p-0 gridblock">
+            <span class="tally">x</span>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="p-0 gridblock border-on-right border-on-top">
+            <span class="tally">o</span>
+          </div>
+          <div class="p-0 gridblock border-on-right border-on-top">
+            <span class="tally">x</span>
+          </div>
+          <div class="p-0 gridblock border-on-top">
+            <span class="tally">o</span>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="p-0 gridblock border-on-right border-on-top">
+            <span class="tally">x</span>
+          </div>
+          <div class="p-0 gridblock border-on-right border-on-top">
+            <span class="tally">o</span>
+          </div>
+          <div class="p-0 gridblock border-on-top">
+            <span class="tally">x</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 text-center muted mt-auto">
+        <p>Designed and Coded by <a class="text-danger" href="http://www.gregwong.me" target="_blank">Greg Wong</a></p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
