@@ -13,14 +13,14 @@ var Board = function() {
   this.makeMove = function(player, row, col) {
     // player is either 'x' or 'o'
     // row and col are 1 based
-    // return either 1 or 2, or null if no winner after that move
+    // return false if problems encountered, else true
     if (player != 'x' && player != 'o') {
       console.error("player must have value of either 'x' or 'o'");
-      return null;
+      return false;
     }
     if (row < 1 || row > ROWS || col < 1 || col > COLS) {
       console.error("row and col given are either smaller than 1 or more than what is allowed");
-      return null;
+      return false;
     }
     var i = getGridIndex(row, col);
     if (grid[i] != null) {
