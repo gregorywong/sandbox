@@ -30,7 +30,7 @@ var Game = function(animateMakeMove, animateWin, displayMessage, pauseAnimation)
 
       if (aiModeOn) {
         var wins = board.getWinner();
-        if (wins.length <= 0){
+        if (wins.length <= 0 && !board.isFull()){
           pauseAnimation(function() {
             AIMove();
             waiting = true;
