@@ -43,6 +43,7 @@ var letsStartOver = function() {
 var startGame = function() {
   game.init(isSinglePlayer, p1sym);
   $('.gridblock').find('span').removeClass('color-win').text("");
+  $("#caption").hide();
   $("#reset").css('visibility', 'visible');
   $("#grid").fadeIn();
 };
@@ -72,7 +73,7 @@ $(document).ready(function() {
     $(".section:visible").fadeOut(askNumPlayers);
   });
 
-  $("#grid").delay(400).fadeOut(1000, askNumPlayers);
+  $("#grid").delay(1000).fadeOut(1000, askNumPlayers);
   // callback chain:
   // askNumPlayers() -> chooseP1Sym() -> startGame()
 
