@@ -8,7 +8,10 @@ var Game = function(animateMakeMove, animateWin, displayMessage, pauseAnimation)
   var waiting;
   var aiModeOn;
 
+  var firstMove;
+
   this.init = function(isSinglePlayer, p1sym) {
+    firstMove = null;
     board.init(p1sym);
     aiModeOn = isSinglePlayer;
     waiting = true;
@@ -24,6 +27,9 @@ var Game = function(animateMakeMove, animateWin, displayMessage, pauseAnimation)
       if (!makeMove(index)){
         // returns false for invalid move
         // don't continue if invalid
+        if (!firstMove) {
+          firstMove = index;
+        }
         waiting = true;
         return false;
       }
