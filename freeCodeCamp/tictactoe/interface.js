@@ -23,10 +23,10 @@ var animateWin = function(arrCombo) {
   for (let index of arrCombo) {
     $("#sq"+index).find('span').addClass('color-win');
   }
-  $("#reset").attr('disabled', 'disabled');
 };
 
 var displayMessage = function(message) {
+  $("#reset").css('visibility', 'hidden');
   $("#message").find("h1").text(message);
   $("#grid").delay(1000).fadeOut(400, function() {
     $("#message").fadeIn().delay(1000).fadeOut(400, letsStartOver);
@@ -43,12 +43,13 @@ var letsStartOver = function() {
 var startGame = function() {
   game.init(isSinglePlayer, p1sym);
   $('.gridblock').find('span').removeClass('color-win').text("");
-  $("#grid").fadeIn(function() {
-    $("#reset").removeAttr('disabled');
-  });
+  $("#reset").css('visibility', 'visible');
+  $("#grid").fadeIn();
 };
 
 $(document).ready(function() {
+
+  $("#reset").css('visibility', 'hidden');
 
   game = new Game(animateMakeMove, animateWin, displayMessage, pauseAnimation);
 
@@ -67,6 +68,7 @@ $(document).ready(function() {
   });
 
   $("#reset").click(function() {
+    $(this).css('visibility', 'hidden');
     $(".section:visible").fadeOut(askNumPlayers);
   });
 
