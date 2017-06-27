@@ -19,6 +19,7 @@ var Game = function(animateMakeMove, animateWin, displayMessage, pauseAnimation)
   };
 
   this.makeMove = function(index) {
+    index = parseInt(index);
     if (waiting) { // don't do anything if it's already running
       if (board.getCurrentPlayer() == undefined) {
         console.error("init() not called yet");

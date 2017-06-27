@@ -80,7 +80,7 @@ $(document).ready(function() {
   // set up the 9 squares to listen to clicks
   $('.gridblock').click(function() {
     var index = $(this).attr('value');
-    game.makeMove(index);
+    game.makeMove(parseInt(index));
   });
 
 });
