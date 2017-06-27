@@ -1,9 +1,8 @@
-var Game = function(animateMakeMove, animateWin, displayWinningMessage, displayTiedMessage) {
+var Game = function(animateMakeMove, animateWin, displayMessage) {
   var board = new Board();
   var animateMakeMove = animateMakeMove;
   var animateWin = animateWin;
-  var displayWinningMessage = displayWinningMessage;
-  var displayTiedMessage = displayTiedMessage;
+  var displayMessage = displayMessage;
 
   var aiModeOn;
 
@@ -19,7 +18,9 @@ var Game = function(animateMakeMove, animateWin, displayWinningMessage, displayT
     }
     makeMove(index); // returns true for valid move
 
-    AIMove();
+    if (aiModeOn) {
+      AIMove();
+    }
   };
 
   this.getGrid = function() {
@@ -37,7 +38,7 @@ var Game = function(animateMakeMove, animateWin, displayWinningMessage, displayT
       return false;
     }
     else {
-      animateMakeMove(currPlayer);
+      animateMakeMove(currPlayer, index);
     }
 
     var wins = board.getWinner();
@@ -52,12 +53,13 @@ var Game = function(animateMakeMove, animateWin, displayWinningMessage, displayT
         name = "Computer";
       }
       else {
-        name = wins[0][0] == getP1Symbol() ? "Player 1" : "Player 2";
+        name = wins[0][0] == board.getP1Symbol() ? "Player 1" : "Player 2";
       }
-      displayWinningMessage(name);
+      var message = name + " won!";
+      displayMessage(message);
     }
     else if (board.isFull()) {
-      displayTiedMessage();
+      displayMessage("It was a tie!");
     }
     return true;
   }

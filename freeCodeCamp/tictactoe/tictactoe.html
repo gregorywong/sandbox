@@ -18,7 +18,8 @@
 
   <script type="text/javascript" src="board.js"></script>
   <script type="text/javascript" src="game.js"></script>
-  <script type="text/javascript" src="boardtests.js"></script>
+  <!-- <script type="text/javascript" src="boardtests.js"></script> -->
+  <script type="text/javascript" src="interface.js"></script>
 
 </head>
 
@@ -32,40 +33,76 @@
         <h1 class="mt-2">Tic Tac Toe</h1>
       </div>
 
-      <div class="col-12 text-center my-auto">
+      <!-- grid -->
+      <div id="grid" class="col-12 text-center my-auto">
         <div class="row justify-content-center">
-          <div class="p-0 gridblock border-on-right">
-            <span class="tally">x</span>
+          <div id="sq0" value="0" class="p-0 gridblock border-on-right">
+            <span class="tally"></span>
           </div>
-          <div class="p-0 gridblock border-on-right">
-            <span class="tally">o</span>
+          <div id="sq1" value="1" class="p-0 gridblock border-on-right">
+            <span class="tally"></span>
           </div>
-          <div class="p-0 gridblock">
-            <span class="tally">x</span>
+          <div id="sq2" value="2" class="p-0 gridblock">
+            <span class="tally"></span>
           </div>
         </div>
         <div class="row justify-content-center">
-          <div class="p-0 gridblock border-on-right border-on-top">
-            <span class="tally">o</span>
+          <div id="sq3" value="3" class="p-0 gridblock border-on-right border-on-top">
+            <span class="tally"></span>
           </div>
-          <div class="p-0 gridblock border-on-right border-on-top">
-            <span class="tally">x</span>
+          <div id="sq4" value="4" class="p-0 gridblock border-on-right border-on-top">
+            <span class="tally"></span>
           </div>
-          <div class="p-0 gridblock border-on-top">
-            <span class="tally">o</span>
+          <div id="sq5" value="5" class="p-0 gridblock border-on-top">
+            <span class="tally"></span>
           </div>
         </div>
         <div class="row justify-content-center">
-          <div class="p-0 gridblock border-on-right border-on-top">
-            <span class="tally">x</span>
+          <div id="sq6" value="6" class="p-0 gridblock border-on-right border-on-top">
+            <span class="tally"></span>
           </div>
-          <div class="p-0 gridblock border-on-right border-on-top">
-            <span class="tally">o</span>
+          <div id="sq7" value="7" class="p-0 gridblock border-on-right border-on-top">
+            <span class="tally"></span>
           </div>
-          <div class="p-0 gridblock border-on-top">
-            <span class="tally">x</span>
+          <div id="sq8" value="8" class="p-0 gridblock border-on-top">
+            <span class="tally"></span>
           </div>
         </div>
+      </div>
+
+      <!-- Number of Players Selection -->
+      <div id="num-players" class="col-12 text-center my-auto" style="display:none;">
+        <h1>How many players?</h1>
+        <div class="row p-2 justify-content-center">
+          <div class="col-3 col-lg-2">
+            <button type="button" class="btn btn-outline-danger w-100 btn-mod num-players-btn" value="1">1</button>
+          </div>
+          <div class="col-1">
+          </div>
+          <div class="col-3 col-lg-2">
+            <button type="button" class="btn btn-outline-danger w-100 btn-mod num-players-btn" value="2">2</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Player 1 Symbol Selection -->
+      <div id="choose-p1-sym" class="col-12 text-center my-auto" style="display:none;">
+        <h1>Player 1, what will you use?</h1>
+        <div class="row p-2 justify-content-center">
+          <div class="col-3 col-lg-2">
+            <button type="button" class="btn btn-outline-danger w-100 btn-mod choose-p1-sym-btn" value="x">x</button>
+          </div>
+          <div class="col-1">
+          </div>
+          <div class="col-3 col-lg-2">
+            <button type="button" class="btn btn-outline-danger w-100 btn-mod choose-p1-sym-btn" value="o">o</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- For Messages -->
+      <div id="message" class="col-12 text-center my-auto" style="display:none;">
+        <h1></h1>
       </div>
 
       <div class="col-12 text-center muted mt-auto">
