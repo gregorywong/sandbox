@@ -1,25 +1,45 @@
-var Game = function(animateMakeMove, animateWin, displayMessage) {
+var Game = function(animateMakeMove, animateWin, displayMessage, pauseAnimation) {
   var board = new Board();
   var animateMakeMove = animateMakeMove;
   var animateWin = animateWin;
   var displayMessage = displayMessage;
+  var pauseAnimation = pauseAnimation;
 
+  var waiting;
   var aiModeOn;
 
   this.init = function(isSinglePlayer, p1sym) {
     board.init(p1sym);
     aiModeOn = isSinglePlayer;
+    waiting = true;
   };
 
   this.makeMove = function(index) {
-    if (board.getCurrentPlayer() == undefined) {
-      console.error("init() not called yet");
-      return false;
-    }
-    makeMove(index); // returns true for valid move
+    if (waiting) { // don't do anything if it's already running
+      if (board.getCurrentPlayer() == undefined) {
+        console.error("init() not called yet");
+        return false;
+      }
+      waiting = false;
+      if (!makeMove(index)){
+        // returns false for invalid move
+        // don't continue if invalid
+        waiting = true;
+        return false;
+      }
 
-    if (aiModeOn) {
-      AIMove();
+      if (aiModeOn) {
+        var wins = board.getWinner();
+        if (wins.length <= 0){
+          pauseAnimation(function() {
+            AIMove();
+            waiting = true;
+          });
+        }
+      }
+      else {
+        waiting = true;
+      }
     }
   };
 

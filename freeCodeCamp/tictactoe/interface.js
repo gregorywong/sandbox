@@ -15,6 +15,10 @@ var animateMakeMove = function(currPlayer, index) {
   $("#sq"+index).find('span').text(currPlayer);
 };
 
+var pauseAnimation = function(callback) {
+  $("#thinking").fadeTo(200,1).delay(400).fadeTo(200, 0, callback);
+};
+
 var animateWin = function(arrCombo) {
   for (let index of arrCombo) {
     $("#sq"+index).find('span').addClass('color-win');
@@ -43,7 +47,7 @@ var startGame = function() {
 
 $(document).ready(function() {
 
-  game = new Game(animateMakeMove, animateWin, displayMessage);
+  game = new Game(animateMakeMove, animateWin, displayMessage, pauseAnimation);
 
   // set up the 2 buttons to return either one or two players
   $('.num-players-btn').click(function() {
@@ -52,7 +56,7 @@ $(document).ready(function() {
     $("#num-players").fadeOut(400, chooseP1Sym);
   });
 
-  // set up the 2 buttons to return either p1sym
+  // set up the 2 buttons to return value for p1sym
   $('.choose-p1-sym-btn').click(function() {
     var sym = $(this).attr('value');
     p1sym = sym == 'x' ? 'x' : 'o';

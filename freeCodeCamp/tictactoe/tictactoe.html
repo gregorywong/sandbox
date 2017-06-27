@@ -27,7 +27,7 @@
 
   <!-- hyperlinks: target="_blank" for codepen.io -->
 
-  <div class="container jumbotron jumbotron-mod h-100">
+  <div class="container jumbotron jumbotron-mod h-100 p-0">
     <div class="row h-100 justify-content-center align-items-between">
       <div class="col-12 text-center">
         <h1 class="mt-2">Tic Tac Toe</h1>
@@ -35,6 +35,9 @@
 
       <!-- grid -->
       <div id="grid" class="col-12 text-center my-auto">
+        <div class="row justify-content-center">
+          <h2 id="thinking" class="text-danger pb-3" style="opacity:0;">Hmm...</h2>
+        </div>
         <div class="row justify-content-center">
           <div id="sq0" value="0" class="p-0 gridblock border-on-right">
             <span class="tally"></span>
@@ -87,7 +90,8 @@
 
       <!-- Player 1 Symbol Selection -->
       <div id="choose-p1-sym" class="col-12 text-center my-auto" style="display:none;">
-        <h1>Player 1, what will you use?</h1>
+        <h1>Player 1, </h1>
+        <h1>choose your symbol:</h1>
         <div class="row p-2 justify-content-center">
           <div class="col-3 col-lg-2">
             <button type="button" class="btn btn-outline-danger w-100 btn-mod choose-p1-sym-btn" value="x">x</button>
@@ -106,7 +110,7 @@
       </div>
 
       <div class="col-12 text-center muted mt-auto">
-        <p>Designed and Coded by <a class="text-danger" href="http://www.gregwong.me" target="_blank">Greg Wong</a></p>
+        <p class="pt-5">Designed and Coded by <a class="text-danger" href="http://www.gregwong.me" target="_blank">Greg Wong</a></p>
       </div>
     </div>
   </div>
