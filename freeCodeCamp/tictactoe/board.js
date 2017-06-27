@@ -45,11 +45,6 @@ var Board = function() {
     return true;
   };
 
-  this.makeMoveByRowCol = function(row, col) {
-    var i = getGridIndex(row, col);
-    return this.makeMove(i); // true if successful, false otherwise
-  };
-
   this.getGrid = function() {
     return grid.slice(); // return a copy so that it can't be modified
   };
@@ -79,10 +74,6 @@ var Board = function() {
       p2 = 'o';
     }
     currPlayer = p1;
-  }
-
-  function getGridIndex(row, col) {
-    return(row-1)*COLS + (col-1);
   }
 
   function updateWinner () {
