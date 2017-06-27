@@ -79,21 +79,19 @@ var Game = function(animateMakeMove, animateWin, displayMessage, pauseAnimation)
       displayMessage(message);
     }
     else if (board.isFull()) {
-      displayMessage("It was a tie!");
+      displayMessage("It's a tie!");
     }
     return true;
   }
 
   function AIMove(){
-    // right now, it only picks the next empty spot
+    // right now, it only picks random spots
     // TODO: make it a proper strategy later on
     var grid = board.getGrid();
-    var nextMove;
-    for (var i = 0; i < grid.length; i++) {
-      if (grid[i] == null) {
-        nextMove = i;
-        break;
-      }
+    // 0 - 8
+    var nextMove = Math.floor(Math.random() * 9);
+    while (grid[nextMove] != null) {
+      nextMove = Math.floor(Math.random() * 9);
     }
     makeMove(nextMove, true);
   }

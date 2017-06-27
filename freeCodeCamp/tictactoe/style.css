@@ -10,6 +10,10 @@ html, body {
   margin-bottom: 0px!important;
 }
 
+.btn-mod-small {
+  font-family: 'Permanent Marker', cursive;
+}
+
 .btn-mod {
   font-family: 'Permanent Marker', cursive;
   font-size: 3em;
@@ -34,7 +38,7 @@ html, body {
 }
 
 .color-win {
-  color: green!important;
+  color: #d9534f!important;
 
   -webkit-transition: all 0.7s ease;
   -moz-transition: all 0.7s ease;

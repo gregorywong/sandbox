@@ -23,6 +23,7 @@ var animateWin = function(arrCombo) {
   for (let index of arrCombo) {
     $("#sq"+index).find('span').addClass('color-win');
   }
+  $("#reset").attr('disabled', 'disabled');
 };
 
 var displayMessage = function(message) {
@@ -35,14 +36,16 @@ var displayMessage = function(message) {
 var letsStartOver = function() {
   $("#message").find("h1").text("Let's start over again.");
   $("#message").fadeIn(400, function() {
-    $(this).delay(1000).fadeOut(400, askNumPlayers);
+    $(this).delay(1000).fadeOut(400, startGame);
   });
 };
 
 var startGame = function() {
   game.init(isSinglePlayer, p1sym);
   $('.gridblock').find('span').removeClass('color-win').text("");
-  $("#grid").fadeIn();
+  $("#grid").fadeIn(function() {
+    $("#reset").removeAttr('disabled');
+  });
 };
 
 $(document).ready(function() {
@@ -61,6 +64,10 @@ $(document).ready(function() {
     var sym = $(this).attr('value');
     p1sym = sym == 'x' ? 'x' : 'o';
     $("#choose-p1-sym").fadeOut(400, startGame);
+  });
+
+  $("#reset").click(function() {
+    $(".section:visible").fadeOut(askNumPlayers);
   });
 
   $("#grid").delay(400).fadeOut(1000, askNumPlayers);
