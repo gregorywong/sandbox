@@ -109,7 +109,7 @@ var AI = function() {
       edge_oppositeCorners = EDGE_OPPOSITE_CORNERS;
       edge_oppositeEdge = OPPOSITES[firstMove];
     }
-    return 4; // center
+    return 4; // return 4 for both corner and edge cases
   }
 
   function getFourthMove() {
