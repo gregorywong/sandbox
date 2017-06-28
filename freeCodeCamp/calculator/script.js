@@ -185,9 +185,6 @@ var Calculator = function(){
 $(document).ready(function() {
   var myCalc = new Calculator();
 
-  // uncomment to run test suite
-  // runTests();
-
   $(".btn").click(function () {
     var displayValues = myCalc.keyPress($(this).val());
     $("#topDisplay").text(displayValues[0]);
@@ -198,7 +195,11 @@ $(document).ready(function() {
 /* Test Suite */
 /* ********** */
 
-var runTests = function () {
+// uncomment to run test suite
+// runTests();
+
+function runTests() {
+
   var myTestCalc = new Calculator();
   const DIGIT_LIMIT_REACHED_MESSAGE = "Digit Limit Reached";
   const MY_TEST_CASES = [
