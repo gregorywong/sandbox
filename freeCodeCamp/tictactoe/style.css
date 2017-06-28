@@ -37,7 +37,7 @@ html, body {
 }
 
 .color-win {
-  color: #d9534f!important;
+  color: red!important;
 
   -webkit-transition: all 0.7s ease;
   -moz-transition: all 0.7s ease;

@@ -20,6 +20,7 @@ var pauseAnimation = function(callback) {
 };
 
 var animateWin = function(arrCombo) {
+  $("#reset").css('visibility', 'hidden');
   for (let index of arrCombo) {
     $("#sq"+index).find('span').addClass('color-win');
   }
@@ -28,7 +29,7 @@ var animateWin = function(arrCombo) {
 var displayMessage = function(message) {
   $("#reset").css('visibility', 'hidden');
   $("#message").find("h1").text(message);
-  $("#grid").delay(1000).fadeOut(400, function() {
+  $("#grid").delay(1300).fadeOut(400, function() {
     $("#message").fadeIn().delay(1000).fadeOut(400, letsStartOver);
   });
 };
