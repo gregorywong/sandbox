@@ -86,7 +86,7 @@ var AI = function() {
       thirdMove = p1move;
       nextMove = getFourthMove();
     }
-    else { // 6th move of the game
+    else { // 6th or 8th move of the game
       nextMove = conquerAndBlockOrRandom();
     }
     grid[nextMove] = 2;
@@ -179,9 +179,8 @@ var AI = function() {
     if (nextMove != null) {
       return nextMove;
     }
-    if (nextMove == null) {
-      return getRandomMove();
-    }
+    // nextMove == null
+    return getRandomMove();
   }
 
   function getRandomMove() {
