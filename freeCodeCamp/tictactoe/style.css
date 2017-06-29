@@ -1,7 +1,15 @@
 html, body {
-  height: 100%;
-  background-color: white;
+  /* use min-height for when the content is longer the screen */
+  min-height: 100vh!important;
   font-family: 'Permanent Marker', cursive;
+}
+
+.min-h-100 {
+  /* use min-height for when the content is longer the screen */
+  min-height: 100vh!important;
+}
+.stretch-vert {
+  min-height: 100vh!important;
 }
 
 .jumbotron-mod {
