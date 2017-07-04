@@ -2,6 +2,7 @@ html, body {
   /* use min-height for when the content is longer the screen */
   min-height: 100vh!important;
   background-color: #E4F0FC;
+  font-family: 'Righteous', cursive;
 }
 
 .min-h-100 {
