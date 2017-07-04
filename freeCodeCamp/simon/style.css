@@ -22,12 +22,18 @@ html, body {
 }
 
 .small-slice-top-left {
-  background-color: #03c03c;
+  background-color: #28D95E;
   border-top-left-radius: 100%;
   width: 150px;
   height: 150px;
   border-right: 5px solid #73777B;
   border-bottom: 5px solid #73777B;
+}
+.small-slice-top-left:active {
+  background-color: #06B63B;
+}
+.green-flash {
+  background-color: #06B63B;
 }
 
 .small-slice-top-right {
@@ -38,6 +44,12 @@ html, body {
   border-left: 5px solid #73777B;
   border-bottom: 5px solid #73777B;
 }
+.small-slice-top-right:active {
+  background-color: red;
+}
+.red-flash {
+  background-color: red;
+}
 
 .small-slice-bottom-left {
   background-color: #fdfd96;
@@ -47,6 +59,12 @@ html, body {
   border-right: 5px solid #73777B;
   border-top: 5px solid #73777B;
 }
+.small-slice-bottom-left:active {
+  background-color: #FFD100;
+}
+.yellow-flash {
+  background-color: #FFD100;
+}
 
 .small-slice-bottom-right {
   background-color: #469BF0;
@@ -55,6 +73,12 @@ html, body {
   height: 150px;
   border-left: 5px solid #73777B;
   border-top: 5px solid #73777B;
+}
+.small-slice-bottom-right:active {
+  background-color: blue;
+}
+.blue-flash {
+  background-color: blue;
 }
 
 .count-box {
@@ -79,11 +103,113 @@ html, body {
   outline: none!important;
 }
 
+.unclickable {
+  pointer-events: none;
+}
+
 /* btn-default has been changed to btn-secondary in Bootstrap 4; adding it here for Bootstrap Toggle */
 .btn-default {
   color: #333;
   background-color: #fff;
   border-color: #ccc;
+}
+
+/* the four following flashes are meant to be used together as an animation upon winning */
+
+@-webkit-keyframes flash-green {
+  26%, 100%   { background-color: #28D95E; }
+  0%, 25% { background-color: #06B63B; }
+}
+@-moz-keyframes flash-green {
+  26%, 100%   { background-color: #28D95E; }
+  0%, 25% { background-color: #06B63B; }
+}
+@-o-keyframes flash-green {
+  26%, 100%   { background-color: #28D95E; }
+  0%, 25% { background-color: #06B63B; }
+}
+@keyframes flash-green {
+  26%, 100%   { background-color: #28D95E; }
+  0%, 25% { background-color: #06B63B; }
+}
+
+.flash-green {
+  -webkit-animation: flash-green 0.5s infinite; /* Safari 4+ */
+  -moz-animation:    flash-green 0.5s infinite; /* Fx 5+ */
+  -o-animation:      flash-green 0.5s infinite; /* Opera 12+ */
+  animation:         flash-green 0.5s infinite; /* IE 10+, Fx 29+ */
+}
+
+@-webkit-keyframes flash-red {
+  0%, 25%, 51% { background-color: #ff6961; }
+  26%, 50% { background-color: red; }
+}
+@-moz-keyframes flash-red {
+  0%, 25%, 51% { background-color: #ff6961; }
+  26%, 50% { background-color: red; }
+}
+@-o-keyframes flash-red {
+  0%, 25%, 51% { background-color: #ff6961; }
+  26%, 50% { background-color: red; }
+}
+@keyframes flash-red {
+  0%, 25%, 51% { background-color: #ff6961; }
+  26%, 50% { background-color: red; }
+}
+
+.flash-red {
+  -webkit-animation: flash-red 0.5s infinite; /* Safari 4+ */
+  -moz-animation:    flash-red 0.5s infinite; /* Fx 5+ */
+  -o-animation:      flash-red 0.5s infinite; /* Opera 12+ */
+  animation:         flash-red 0.5s infinite; /* IE 10+, Fx 29+ */
+}
+
+@-webkit-keyframes flash-yellow {
+  0%, 75%   { background-color: #fdfd96; }
+  76%, 100% { background-color: #FFD100; }
+}
+@-moz-keyframes flash-yellow {
+  0%, 75%   { background-color: #fdfd96; }
+  76%, 100% { background-color: #FFD100; }
+}
+@-o-keyframes flash-yellow {
+  0%, 75%   { background-color: #fdfd96; }
+  76%, 100% { background-color: #FFD100; }
+}
+@keyframes flash-yellow {
+  0%, 75%   { background-color: #fdfd96; }
+  76%, 100% { background-color: #FFD100; }
+}
+
+.flash-yellow {
+  -webkit-animation: flash-yellow 0.5s infinite; /* Safari 4+ */
+  -moz-animation:    flash-yellow 0.5s infinite; /* Fx 5+ */
+  -o-animation:      flash-yellow 0.5s infinite; /* Opera 12+ */
+  animation:         flash-yellow 0.5s infinite; /* IE 10+, Fx 29+ */
+}
+
+@-webkit-keyframes flash-blue {
+  0%, 50%, 76% { background-color: #469BF0; }
+  51%, 75% { background-color: blue; }
+}
+@-moz-keyframes flash-blue {
+  0%, 50%, 76% { background-color: #469BF0; }
+  51%, 75% { background-color: blue; }
+}
+@-o-keyframes flash-blue {
+  0%, 50%, 76% { background-color: #469BF0; }
+  51%, 75% { background-color: blue; }
+}
+@keyframes flash-blue {
+  0%, 50%, 76% { background-color: #469BF0; }
+  51%, 75% { background-color: blue; }
+}
+
+.flash-blue {
+  -webkit-animation: flash-blue 0.5s infinite; /* Safari 4+ */
+  -moz-animation:    flash-blue 0.5s infinite; /* Fx 5+ */
+  -o-animation:      flash-blue 0.5s infinite; /* Opera 12+ */
+  animation:         flash-blue 0.5s infinite; /* IE 10+, Fx 29+ */
 }
 
 /* testing only */
