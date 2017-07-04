@@ -6,8 +6,7 @@ const INT_TO_COLOR = {
   4: 'yellow',
 };
 
-// TODO: set to 20
-const MAX_COUNT = 3;
+const MAX_COUNT = 20;
 
 var green, red, blue, yellow;
 var nextRound, victory, buzzer;
