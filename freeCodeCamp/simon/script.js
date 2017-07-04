@@ -9,12 +9,23 @@ const INT_TO_COLOR = {
 // TODO: set to 20
 const MAX_COUNT = 3;
 
+var green, red, blue, yellow;
+var nextRound, victory, buzzer;
+
 var strictMode = false;
 var count = 0;
 var sequenceOfCurrRound = [];
 var userRequiredSequence = [];
 
 $(document).ready(function() {
+
+  green = document.getElementById("green-audio");
+  red = document.getElementById("red-audio");
+  blue = document.getElementById("blue-audio");
+  yellow = document.getElementById("yellow-audio");
+  nextRound = document.getElementById('next-round');
+  victory = document.getElementById('victory');
+  buzzer = document.getElementById('buzzer');
 
   // strict mode listener
   $("#strict-mode").change(function() {
@@ -31,14 +42,14 @@ $(document).ready(function() {
       toggleCountBoxColor();
     }, 500);
 
-    // TODO: play start sound
+    nextRound.play();
     flashToggle(); // show an animation
     setTimeout(function() {
       flashToggle(); // turn off flashing
 
       addToRandomSequence();
       roundStart();
-    }, 2000); // stop the animation
+    }, 1500); // stop the animation
   });
 
   // color button listeners
@@ -92,8 +103,8 @@ function disableClickableButtons() {
 }
 
 function flash(color, callback) {
-  // TODO: play corresponding sound
   $('#'+color).addClass('blink-'+color);
+  eval(color).play();
 
   setTimeout(function() {
     $('#'+color).removeClass('blink-'+color);
@@ -112,16 +123,19 @@ function roundStart() {
     // last func to be called as a callback
     // all color buttons are set to unclickable at first, so activate them
     var funcChain = enableClickableButtons;
+    var wait = 0;
 
     for (var i = sequenceOfCurrRound.length - 1; i >= 0; i--) {
       let color = INT_TO_COLOR[sequenceOfCurrRound[i]];
       let prevFunc = funcChain;
+      let prevWait = wait;
       let func = function() {
         flash(color, function() {
-          setTimeout(prevFunc, 500);
+          setTimeout(prevFunc, prevWait);
         });
       };
       funcChain = func;
+      wait = 500;
     }
 
     funcChain();
@@ -134,18 +148,21 @@ function roundPassed() {
 
   count++;
   if (count > MAX_COUNT) {
-    // TODO: play victory sound
+    victory.play();
 
+    flashToggle();
     setTimeout(function() {
       flashToggle(); // turn off flashing
 
       // game effectively resets at this point
       count = 0;
       $("#count").val("--");
-    }, 2000);
+      victory.pause();
+      victory.currentTime = 0;
+    }, 10000);
   }
   else {
-    // TODO: play round passed sound
+    nextRound.play();
 
     setCount(count);
     toggleCountBoxColor();
@@ -159,7 +176,7 @@ function roundPassed() {
 
       addToRandomSequence(); // add one more
       roundStart();
-    }, 2000); // stop the animation
+    }, 1500); // stop the animation
   }
 }
 
@@ -176,7 +193,7 @@ function incorrectReaction() {
   $("#blue").addClass('blink-blue');
   $("#yellow").addClass('blink-yellow');
 
-  // TODO: play buzzer sound
+  buzzer.play();
 
   setTimeout(function() {
     $("#green").removeClass('blink-green');
