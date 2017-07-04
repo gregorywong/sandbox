@@ -1,9 +1,20 @@
+const FLASH_DURATION = 1000; // milliseconds
+const INT_TO_COLOR = {
+  1: 'green',
+  2: 'red',
+  3: 'blue',
+  4: 'yellow',
+};
+
+// TODO: set to 20
+const MAX_COUNT = 3;
+
 var strictMode = false;
-const FLASH_DURATION = 500; // milliseconds
 var count = 0;
+var sequenceOfCurrRound = [];
+var userRequiredSequence = [];
 
 $(document).ready(function() {
-
 
   // strict mode listener
   $("#strict-mode").change(function() {
@@ -12,17 +23,22 @@ $(document).ready(function() {
 
   // start button listener
   $("#start-button").click(function(event) {
-    count = 0;
-    $("#count").val("--");
+    sequenceOfCurrRound = [];
+    count = 1;
+    setCount(count);
+    toggleCountBoxColor();
+    setTimeout(function() {
+      toggleCountBoxColor();
+    }, 500);
 
-    // TODO: start sound
+    // TODO: play start sound
     flashToggle(); // show an animation
     setTimeout(function() {
       flashToggle(); // turn off flashing
-      count++;
-    }, 2000); // stop the animation
 
-    roundStart(); // display flash animation and "progress to" to level 1
+      addToRandomSequence();
+      roundStart();
+    }, 2000); // stop the animation
   });
 
   // color button listeners
@@ -31,11 +47,18 @@ $(document).ready(function() {
 
     disableClickableButtons();
     flash(color, function() {
-      // TODO: check if correct
-      // if correct and already entered everything
-      // roundPassed();
-      // if incorrect
-      // incorrectReaction();
+      var correctColor = INT_TO_COLOR[userRequiredSequence.shift()];
+      if (color == correctColor) {
+        if (userRequiredSequence.length <= 0) {
+          setTimeout(roundPassed, 1000);
+        }
+        else {
+          enableClickableButtons();
+        }
+      }
+      else {
+        incorrectReaction();
+      }
     });
 
   });
@@ -70,9 +93,10 @@ function disableClickableButtons() {
 
 function flash(color, callback) {
   // TODO: play corresponding sound
-  $('#'+color).addClass(color+'-flash');
+  $('#'+color).addClass('blink-'+color);
+
   setTimeout(function() {
-    $('#'+color).removeClass(color+'-flash');
+    $('#'+color).removeClass('blink-'+color);
     if (callback) {
       callback();
     }
@@ -84,49 +108,64 @@ function toggleCountBoxColor() {
 }
 
 function roundStart() {
-  setTimeout(function() { // wait one second
-
-    // TODO: play sequence
-
+  setTimeout(function() {
+    // last func to be called as a callback
     // all color buttons are set to unclickable at first, so activate them
-    enableClickableButtons();
+    var funcChain = enableClickableButtons;
 
-  }, 1000);
+    for (var i = sequenceOfCurrRound.length - 1; i >= 0; i--) {
+      let color = INT_TO_COLOR[sequenceOfCurrRound[i]];
+      let prevFunc = funcChain;
+      let func = function() {
+        flash(color, function() {
+          setTimeout(prevFunc, 500);
+        });
+      };
+      funcChain = func;
+    }
+
+    funcChain();
+
+  }, 500);
 }
 
 function roundPassed() {
   disableClickableButtons();
 
-  // TODO: play round passed sound
+  count++;
+  if (count > MAX_COUNT) {
+    // TODO: play victory sound
 
-  flashToggle(); // show an animation
-  setTimeout(function() {
-    count++;
-    if (count > 20) {
-      // TODO: play victory sound
-
-      setTimeout(function() {
-        flashToggle(); // turn off flashing
-
-        // game effectively resets at this point
-        count = 0;
-        $("#count").val("--");
-      }, 2000);
-    }
-    else {
+    setTimeout(function() {
       flashToggle(); // turn off flashing
-      setCount(count);
+
+      // game effectively resets at this point
+      count = 0;
+      $("#count").val("--");
+    }, 2000);
+  }
+  else {
+    // TODO: play round passed sound
+
+    setCount(count);
+    toggleCountBoxColor();
+    setTimeout(function() {
       toggleCountBoxColor();
-      setTimeout(function() {
-        toggleCountBoxColor();
-      }, 1000);
+    }, 500);
 
-      // TODO: randomly generate sequence
+    flashToggle(); // show an animation
+    setTimeout(function() {
+      flashToggle(); // turn off flashing
 
+      addToRandomSequence(); // add one more
       roundStart();
-    }
+    }, 2000); // stop the animation
+  }
+}
 
-  }, 2000); // stop the animation
+function addToRandomSequence() {
+  sequenceOfCurrRound.push(Math.floor(Math.random()*4 + 1));
+  userRequiredSequence = sequenceOfCurrRound.slice();
 }
 
 function incorrectReaction() {
@@ -150,6 +189,7 @@ function incorrectReaction() {
       $("#count").val("--");
     }
     else {
+      userRequiredSequence = sequenceOfCurrRound.slice();
       roundStart();
     }
   }, 1500);
