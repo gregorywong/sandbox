@@ -1,5 +1,8 @@
 var strictMode = false;
-var awaitingInput = true;
+// TODO:
+// var gameStarted = false;
+var gameStarted = true;
+const FLASH_TIME = 500; // milliseconds
 
 $(document).ready(function() {
 
@@ -10,15 +13,26 @@ $(document).ready(function() {
 
   // start button listener
   $("#start-button").click(function(event) {
-    // TODO:
+    flashToggle(); // show an animation
+    gameStarted = true;
+    setTimeout(function() {
+      flashToggle(); // turn off flashing
+      // all color buttons are set to unclickable at first, so activate them
+      toggleClickableButtons();
+    }, 2000); // stop the animation
+
+    // TODO: counter
+    // TODO: start sound
   });
 
   // color button listeners
   $(".color-button").click(function(event) {
-    if (awaitingInput) {
+    if (gameStarted) {
       var color = $(this).attr("id");
-      // TODO: remove logging
-      console.log(color);
+
+      toggleClickableButtons();
+      flash(color,toggleClickableButtons);
+
       // TODO: play sound
     }
   });
@@ -35,7 +49,16 @@ function flashToggle() {
   $("#yellow").toggleClass('flash-yellow');
 }
 
-function disableButtons() {
-  // awaitingInput should also be false
-  $(".color-button").addClass('unclickable');
+function toggleClickableButtons() {
+  $(".color-button").toggleClass('unclickable');
+}
+
+function flash(color, callback) {
+  $('#'+color).addClass(color+'-flash');
+  setTimeout(function() {
+    $('#'+color).removeClass(color+'-flash');
+    if (callback) {
+      callback();
+    }
+  }, FLASH_TIME);
 }
