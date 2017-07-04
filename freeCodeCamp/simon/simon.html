@@ -37,19 +37,19 @@
       <div id="grid" class="col-12 my-auto">
         <div class="row justify-content-center big-circle mx-auto">
           <div class="col-6 p-0 m-0">
-            <div class="small-slice-top-left">
+            <div data-color="green" class="color-button small-slice-top-left">
             </div>
           </div>
           <div class="col-6 p-0 m-0">
-            <div class="small-slice-top-right">
+            <div data-color="red" class="color-button small-slice-top-right">
             </div>
           </div>
           <div class="col-6 p-0 m-0">
-            <div class="small-slice-bottom-left">
+            <div data-color="yellow" class="color-button small-slice-bottom-left">
             </div>
           </div>
           <div class="col-6 p-0 m-0">
-            <div class="small-slice-bottom-right">
+            <div data-color="blue" class="color-button small-slice-bottom-right">
             </div>
           </div>
         </div>
@@ -58,7 +58,7 @@
 
           <div class="col-3 col-md-2 col-xl-1 mt-auto">
             <div class="row justify-content-center">
-              <input type="text" class="count-box text-center" value="00" disabled/>
+              <input id="count" type="text" class="count-box text-center" value="00" disabled/>
             </div>
             <div class="row justify-content-center">
               Count
@@ -67,7 +67,7 @@
 
           <div class="col-3 col-md-2 col-xl-1 mt-auto text-center">
             <div class="row justify-content-center">
-              <button class="start-button">00</button>
+              <button id="start-button" class="start-button">00</button>
             </div>
             <div class="row justify-content-center">
               Start
@@ -76,7 +76,7 @@
 
           <div class="col-3 col-md-2 col-xl-1 mt-auto text-center">
             <div class="row justify-content-center">
-              <input type="checkbox" data-toggle="toggle" data-size="small" data-onstyle="danger" data-offstyle="default">
+              <input id="strict-mode" type="checkbox" data-toggle="toggle" data-size="small" data-onstyle="danger" data-offstyle="default">
             </div>
             <div class="row justify-content-center">
               Strict
