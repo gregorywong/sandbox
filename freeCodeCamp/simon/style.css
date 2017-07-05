@@ -22,7 +22,7 @@ html, body {
 }
 
 .small-slice-top-left {
-  background-color: #28D95E;
+  background-color : #00a74a;
   border-top-left-radius: 100%;
   width: 150px;
   height: 150px;
@@ -30,14 +30,14 @@ html, body {
   border-bottom: 5px solid #73777B;
 }
 .small-slice-top-left:active {
-  background-color: #06B63B;
+  background-color: #13ff7c;
 }
 .blink-green {
-  background-color: #06B63B;
+  background-color: #13ff7c;
 }
 
 .small-slice-top-right {
-  background-color: #ff6961;
+  background-color : #9f0f17;
   border-top-right-radius: 100%;
   width: 150px;
   height: 150px;
@@ -45,14 +45,14 @@ html, body {
   border-bottom: 5px solid #73777B;
 }
 .small-slice-top-right:active {
-  background-color: red;
+  background-color: #ff4c4c;
 }
 .blink-red {
-  background-color: red;
+  background-color: #ff4c4c;
 }
 
 .small-slice-bottom-left {
-  background-color: #fdfd96;
+  background-color: #cca707;
   border-bottom-left-radius: 100%;
   width: 150px;
   height: 150px;
@@ -60,14 +60,14 @@ html, body {
   border-top: 5px solid #73777B;
 }
 .small-slice-bottom-left:active {
-  background-color: #FFD100;
+  background-color: #fdfd96;
 }
 .blink-yellow {
-  background-color: #FFD100;
+  background-color: #fdfd96;
 }
 
 .small-slice-bottom-right {
-  background-color: #469BF0;
+  background-color: #094a8f;
   border-bottom-right-radius: 100%;
   width: 150px;
   height: 150px;
@@ -75,10 +75,10 @@ html, body {
   border-top: 5px solid #73777B;
 }
 .small-slice-bottom-right:active {
-  background-color: blue;
+  background-color: #1c8cff;
 }
 .blink-blue {
-  background-color: blue;
+  background-color: #1c8cff;
 }
 
 .count-box {
@@ -121,20 +121,20 @@ html, body {
 /* the four following flashes are meant to be used together as an animation upon winning */
 
 @-webkit-keyframes flash-green {
-  26%, 100%   { background-color: #28D95E; }
-  0%, 25% { background-color: #06B63B; }
+  26%, 100%   { background-color: #00a74a; }
+  0%, 25% { background-color: #13ff7c; }
 }
 @-moz-keyframes flash-green {
-  26%, 100%   { background-color: #28D95E; }
-  0%, 25% { background-color: #06B63B; }
+  26%, 100%   { background-color: #00a74a; }
+  0%, 25% { background-color: #13ff7c; }
 }
 @-o-keyframes flash-green {
-  26%, 100%   { background-color: #28D95E; }
-  0%, 25% { background-color: #06B63B; }
+  26%, 100%   { background-color: #00a74a; }
+  0%, 25% { background-color: #13ff7c; }
 }
 @keyframes flash-green {
-  26%, 100%   { background-color: #28D95E; }
-  0%, 25% { background-color: #06B63B; }
+  26%, 100%   { background-color: #00a74a; }
+  0%, 25% { background-color: #13ff7c; }
 }
 
 .flash-green {
@@ -145,20 +145,20 @@ html, body {
 }
 
 @-webkit-keyframes flash-red {
-  0%, 25%, 51% { background-color: #ff6961; }
-  26%, 50% { background-color: red; }
+  0%, 25%, 51% { background-color: #9f0f17; }
+  26%, 50% { background-color: #ff4c4c; }
 }
 @-moz-keyframes flash-red {
-  0%, 25%, 51% { background-color: #ff6961; }
-  26%, 50% { background-color: red; }
+  0%, 25%, 51% { background-color: #9f0f17; }
+  26%, 50% { background-color: #ff4c4c; }
 }
 @-o-keyframes flash-red {
-  0%, 25%, 51% { background-color: #ff6961; }
-  26%, 50% { background-color: red; }
+  0%, 25%, 51% { background-color: #9f0f17; }
+  26%, 50% { background-color: #ff4c4c; }
 }
 @keyframes flash-red {
-  0%, 25%, 51% { background-color: #ff6961; }
-  26%, 50% { background-color: red; }
+  0%, 25%, 51% { background-color: #9f0f17; }
+  26%, 50% { background-color: #ff4c4c; }
 }
 
 .flash-red {
@@ -169,20 +169,20 @@ html, body {
 }
 
 @-webkit-keyframes flash-yellow {
-  0%, 75%   { background-color: #fdfd96; }
-  76%, 100% { background-color: #FFD100; }
+  0%, 75%   { background-color: #cca707; }
+  76%, 100% { background-color: #fdfd96; }
 }
 @-moz-keyframes flash-yellow {
-  0%, 75%   { background-color: #fdfd96; }
-  76%, 100% { background-color: #FFD100; }
+  0%, 75%   { background-color: #cca707; }
+  76%, 100% { background-color: #fdfd96; }
 }
 @-o-keyframes flash-yellow {
-  0%, 75%   { background-color: #fdfd96; }
-  76%, 100% { background-color: #FFD100; }
+  0%, 75%   { background-color: #cca707; }
+  76%, 100% { background-color: #fdfd96; }
 }
 @keyframes flash-yellow {
-  0%, 75%   { background-color: #fdfd96; }
-  76%, 100% { background-color: #FFD100; }
+  0%, 75%   { background-color: #cca707; }
+  76%, 100% { background-color: #fdfd96; }
 }
 
 .flash-yellow {
@@ -193,20 +193,20 @@ html, body {
 }
 
 @-webkit-keyframes flash-blue {
-  0%, 50%, 76% { background-color: #469BF0; }
-  51%, 75% { background-color: blue; }
+  0%, 50%, 76% { background-color: #094a8f; }
+  51%, 75% { background-color: #1c8cff; }
 }
 @-moz-keyframes flash-blue {
-  0%, 50%, 76% { background-color: #469BF0; }
-  51%, 75% { background-color: blue; }
+  0%, 50%, 76% { background-color: #094a8f; }
+  51%, 75% { background-color: #1c8cff; }
 }
 @-o-keyframes flash-blue {
-  0%, 50%, 76% { background-color: #469BF0; }
-  51%, 75% { background-color: blue; }
+  0%, 50%, 76% { background-color: #094a8f; }
+  51%, 75% { background-color: #1c8cff; }
 }
 @keyframes flash-blue {
-  0%, 50%, 76% { background-color: #469BF0; }
-  51%, 75% { background-color: blue; }
+  0%, 50%, 76% { background-color: #094a8f; }
+  51%, 75% { background-color: #1c8cff; }
 }
 
 .flash-blue {
