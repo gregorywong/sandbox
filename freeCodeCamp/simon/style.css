@@ -216,8 +216,3 @@ html, body {
   -o-animation:      flash-blue 0.5s infinite; /* Opera 12+ */
   animation:         flash-blue 0.5s infinite; /* IE 10+, Fx 29+ */
 }
-
-/* testing only */
-.test-red {
-  background-color: red;
-}
