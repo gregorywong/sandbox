@@ -19,6 +19,7 @@ html, body {
   height: 300px;
   border-radius: 50%;
   box-shadow: 0 0 0 10px #73777B;
+  background-color: #73777B;
 }
 
 .small-slice-top-left {
